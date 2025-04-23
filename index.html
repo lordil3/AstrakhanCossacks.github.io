@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Астраханское Казачество</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #f8f5f2;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-theme {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    .container {
+      width: 80%;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .highlight {
+      color: #8B0000; /* Бордовый */
+      font-weight: bold;
+    }
+
+    body.dark-theme .highlight {
+      color: #D4AF37; /* Золотой */
+    }
+
+    /* Button styles */
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-default {
+      background-color: #8B0000; /* Бордовый */
+      color: white;
+    }
+
+    .btn-default:hover {
+      background-color: #6B0000;
+    }
+
+    body.dark-theme .btn-default {
+      background-color: #D4AF37; /* Золотой */
+      color: #333;
+    }
+
+    body.dark-theme .btn-default:hover {
+      background-color: #C9A227;
+    }
+
+    .btn-outline {
+      border: 2px solid #8B0000;
+      color: #8B0000;
+      background-color: transparent;
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(139, 0, 0, 0.1);
+    }
+
+    body.dark-theme .btn-outline {
+      border-color: #D4AF37;
+      color: #D4AF37;
+    }
+
+    body.dark-theme .btn-outline:hover {
+      background-color: rgba(212, 175, 55, 0.1);
+    }
+
+    .btn-ghost {
+      color: #6b7280;
+      background-color: transparent;
+    }
+
+    body.dark-theme .btn-ghost {
+      color: #9ca3af;
+    }
+
+    .btn-ghost:hover {
+      background-color: rgba(139, 0, 0, 0.1);
+      color: #8B0000;
+    }
+
+    body.dark-theme .btn-ghost:hover {
+      background-color: rgba(212, 175, 55, 0.1);
+      color: #D4AF37;
+    }
+
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    /* Card styles */
+    .card {
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      background-color: white;
+    }
+
+    body.dark-theme .card {
+      background-color: #1e1e1e;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-header {
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    body.dark-theme .card-header {
+      border-bottom-color: #374151;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .card-description {
+      color: #6b7280;
+    }
+
+    body.dark-theme .card-description {
+      color: #9ca3af;
+    }
+
+    .card-content {
+      padding: 1rem;
+    }
+
+    /* Timeline styles */
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: #8B0000;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+      border-radius: 3px;
+    }
+
+    body.dark-theme .timeline::after {
+      background-color: #D4AF37;
+    }
+
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      box-sizing: border-box;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -12px;
+      background-color: white;
+      border: 4px solid #8B0000;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    body.dark-theme .timeline-item::after {
+      background-color: #1e1e1e;
+      border-color: #D4AF37;
+    }
+
+    .left {
+      left: 0;
+    }
+
+    .right {
+      left: 50%;
+    }
+
+    .left::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      right: 30px;
+      border: medium solid #8B0000;
+      border-width: 10px 0 10px 10px;
+      border-color: transparent transparent transparent #8B0000;
+    }
+
+    body.dark-theme .left::before {
+      border-color: transparent transparent transparent #D4AF37;
+    }
+
+    .right::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      left: 30px;
+      border: medium solid #8B0000;
+      border-width: 10px 10px 10px 0;
+      border-color: transparent #8B0000 transparent transparent;
+    }
+
+    body.dark-theme .right::before {
+      border-color: transparent #D4AF37 transparent transparent;
+    }
+
+    .right::after {
+      left: -12px;
+    }
+
+    .timeline-content {
+      padding: 20px 30px;
+      background-color: white;
+      position: relative;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    body.dark-theme .timeline-content {
+      background-color: #1e1e1e;
+    }
+
+    /* Gallery styles */
+    .gallery-container {
+      position: relative;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .gallery-slide {
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+
+    .gallery-slide.active {
+      display: block;
+    }
+
+    .gallery-nav {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .gallery-dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .gallery-dot.active {
+      background-color: #8B0000;
+    }
+
+    body.dark-theme .gallery-dot.active {
+      background-color: #D4AF37;
+    }
+
+    /* Map styles */
+    .map-container {
+      position: relative;
+      overflow: hidden;
+      padding-top: 56.25%;
+      border-radius: 0.5rem;
+    }
+
+    .map-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Wikipedia link */
+    .wiki-link {
+      display: inline-flex;
+      align-items: center;
+      color: #8B0000;
+      text-decoration: none;
+      margin-top: 10px;
+      transition: color 0.2s;
+    }
+
+    .wiki-link:hover {
+      color: #6B0000;
+      text-decoration: underline;
+    }
+
+    body.dark-theme .wiki-link {
+      color: #D4AF37;
+    }
+
+    body.dark-theme .wiki-link:hover {
+      color: #C9A227;
+    }
+
+    /* Responsive adjustments */
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 31px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      .timeline-item::before {
+        left: 60px;
+        border: medium solid #8B0000;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent #8B0000 transparent transparent;
+      }
+
+      body.dark-theme .timeline-item::before {
+        border-color: transparent #D4AF37 transparent transparent;
+      }
+
+      .left::after, .right::after {
+        left: 18px;
+      }
+
+      .right {
+        left: 0%;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-gray-900">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white shadow-md transition-colors duration-300 dark-theme:bg-gray-800">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-4">
+        <img src="https://www.ria1914.info/images/thumb/0/06/%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B5_%D0%B2%D0%BE%D0%B9%D1%81%D0%BA%D0%BE%2C_%D0%B7%D0%BD%D0%B0%D0%BA.jpg/250px-%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B5_%D0%B2%D0%BE%D0%B9%D1%81%D0%BA%D0%BE%2C_%D0%B7%D0%BD%D0%B0%D0%BA.jpg" 
+           alt="Герб Астраханского Казачества" 
+           class="w-16 h-16 object-contain">
+        <h1 class="text-xl font-bold">Астраханское Казачество</h1>
+      </div>
+      <div class="flex items-center space-x-4">
+        <nav class="hidden md:flex space-x-4">
+          <button class="btn btn-default px-4 py-2 font-medium" onclick="showSection('history')">
+            <i class="fas fa-landmark mr-2"></i>История
+          </button>
+          <button class="btn btn-ghost px-4 py-2 font-medium hover:bg-red-50 dark:hover:bg-yellow-900" onclick="showSection('culture')">
+            <i class="fas fa-music mr-2"></i>Культура
+          </button>
+          <button class="btn btn-ghost px-4 py-2 font-medium hover:bg-red-50 dark:hover:bg-yellow-900" onclick="showSection('modern')">
+            <i class="fas fa-users mr-2"></i>Современность
+          </button>
+          <button class="btn btn-ghost px-4 py-2 font-medium hover:bg-red-50 dark:hover:bg-yellow-900" onclick="showSection('gallery')">
+            <i class="fas fa-images mr-2"></i>Галерея
+          </button>
+          <button class="btn btn-ghost px-4 py-2 font-medium hover:bg-red-50 dark:hover:bg-yellow-900" onclick="showSection('news')">
+            <i class="fas fa-newspaper mr-2"></i>Новости
+          </button>
+          <button class="btn btn-ghost px-4 py-2 font-medium hover:bg-red-50 dark:hover:bg-yellow-900" onclick="showSection('contacts')">
+            <i class="fas fa-envelope mr-2"></i>Контакты
+          </button>
+        </nav>
+        <button class="btn btn-outline px-4 py-2 font-medium" onclick="toggleDarkMode()">
+          <i class="fas fa-moon mr-2"></i>Тема
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg transition-colors duration-300 dark-theme:bg-gray-800">
+    <div class="flex justify-around py-2">
+      <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('history')">
+        <i class="fas fa-landmark mb-1"></i>
+        <span>История</span>
+      </button>
+      <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('culture')">
+        <i class="fas fa-music mb-1"></i>
+        <span>Культура</span>
+      </button>
+      <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('modern')">
+        <i class="fas fa-users mb-1"></i>
+        <span>Современность</span>
+      </button>
+    </div>
+    <div class="flex justify-around py-2">
+      <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('gallery')">
+        <i class="fas fa-images mb-1"></i>
+        <span>Галерея</span>
+      </button>
+      <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('news')">
+        <i class="fas fa-newspaper mb-1"></i>
+        <span>Новости</span>
+      </button>
+      <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('contacts')">
+        <i class="fas fa-envelope mb-1"></i>
+        <span>Контакты</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8 pb-20 md:pb-8">
+    <!-- History Section -->
+    <section id="history-section" class="space-y-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">История Астраханского Казачества</h2>
+        </div>
+        <div class="card-content">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <p>
+                Астраханское казачье войско было образовано в 1817 году для защиты южных границ Российской империи. Оно сыграло важную роль в обеспечении безопасности региона, охраняя торговые пути и участвуя в военных кампаниях.
+              </p>
+              <p>
+                Казаки несли службу по охране торговых путей, участвовали в военных кампаниях и занимались рыболовством. Их деятельность была разнообразной и включала участие в Кавказской войне, реформы казачьих войск и многое другое.
+              </p>
+              <p>
+                В начале XX века войско насчитывало около 40 тысяч человек, проживавших в станицах вдоль Волги. Казаки активно участвовали в жизни региона, занимаясь сельским хозяйством, ремеслами и торговлей.
+              </p>
+              <p>
+                После революции 1917 года войско было упразднено, но в 1991 году казачество было возрождено в новых условиях. Сегодня астраханские казаки продолжают традиции своих предков, занимаясь патриотическим воспитанием молодежи и сохранением культурного наследия.
+              </p>
+              <a href="https://ru.wikipedia.org/wiki/%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B5_%D0%B2%D0%BE%D0%B9%D1%81%D0%BA%D0%BE" class="wiki-link" target="_blank">
+                <i class="fab fa-wikipedia-w mr-2"></i> Узнать больше в Википедии
+              </a>
+            </div>
+            <div class="flex justify-center">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Astrakhan_Cossacks_1880s.jpg/800px-Astrakhan_Cossacks_1880s.jpg" alt="Астраханские казаки в 1880-х годах" class="rounded-lg shadow-md w-full h-auto object-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Хронология важных событий</h2>
+        </div>
+        <div class="card-content">
+          <div class="timeline">
+            <div class="timeline-item left">
+              <div class="timeline-content">
+                <h3 class="font-bold">1817 год</h3>
+                <p>Образование Астраханского казачьего войска указом императора Александра I. Войско было создано для защиты южных границ и поддержания порядка в регионе.</p>
+              </div>
+            </div>
+            <div class="timeline-item right">
+              <div class="timeline-content">
+                <h3 class="font-bold">1830-е годы</h3>
+                <p>Активное участие казаков в Кавказской войне. Казаки проявили себя как отличные воины, защищая интересы Российской империи.</p>
+              </div>
+            </div>
+            <div class="timeline-item left">
+              <div class="timeline-content">
+                <h3 class="font-bold">1860 год</h3>
+                <p>Реформа казачьих войск, утверждение нового положения. В этот период были внесены изменения в структуру и управление войском.</p>
+              </div>
+            </div>
+            <div class="timeline-item right">
+              <div class="timeline-content">
+                <h3 class="font-bold">1918 год</h3>
+                <p>Упразднение войска после революции. Казачьи формирования были распущены, и многие казаки пострадали от репрессий.</p>
+              </div>
+            </div>
+            <div class="timeline-item left">
+              <div class="timeline-content">
+                <h3 class="font-bold">1991 год</h3>
+                <p>Возрождение казачества в новых условиях. В этот период началось восстановление казачьих традиций и обычаев.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="culture-section" class="space-y-6" style="display: none;">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Культура и традиции</h2>
+        </div>
+        <div class="card-content">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <p>
+                Культура астраханских казаков представляет собой уникальный сплав русских, калмыцких и татарских традиций. Это результат многовекового соседства и взаимодействия различных народов.
+              </p>
+              <p>
+                Особое место в культуре казаков занимают песни и танцы, которые передавались из поколения в поколение. Эти произведения искусства отражают дух и характер казаков, их любовь к свободе и родной земле.
+              </p>
+              <p>
+                Традиционная одежда казаков включала черкески, папахи и сапоги. Эти элементы одежды были не только практичными, но и символизировали принадлежность к казачьему сообществу.
+              </p>
+              <p>
+                Казаки также известны своими ремеслами, такими как изготовление оружия, конской упряжи и предметов быта. Эти навыки передавались от отца к сыну и помогали казакам выживать в суровых условиях.
+              </p>
+              <a href="https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B8_%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D0%B0" class="wiki-link" target="_blank">
+                <i class="fab fa-wikipedia-w mr-2"></i> Узнать больше о казачьей культуре
+              </a>
+            </div>
+            <div class="flex justify-center">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" alt="Казачий танец" class="rounded-lg shadow-md w-full h-auto object-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Традиционные праздники</h2>
+        </div>
+        <div class="card-content">
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="card bg-gray-50 dark:bg-gray-700">
+              <div class="card-header">
+                <h3 class="card-title text-lg">Пасха</h3>
+              </div>
+              <div class="card-content">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Easter_Eggs_-_Stuttgart_-_Germany_2017.jpg/800px-Easter_Eggs_-_Stuttgart_-_Germany_2017.jpg" alt="Пасха" class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300">Традиционные пасхальные гуляния с крашеными яйцами и праздничными богослужениями.</p>
+              </div>
+            </div>
+            <div class="card bg-gray-50 dark:bg-gray-700">
+              <div class="card-header">
+                <h3 class="card-title text-lg">Масленица</h3>
+              </div>
+              <div class="card-content">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Maslenitsa_in_Yaroslavl_2011-12.jpg/800px-Maslenitsa_in_Yaroslavl_2011-12.jpg" alt="Масленица" class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300">Проводы зимы с блинами, народными гуляниями и традиционными играми.</p>
+              </div>
+            </div>
+            <div class="card bg-gray-50 dark:bg-gray-700">
+              <div class="card-header">
+                <h3 class="card-title text-lg">Казачий круг</h3>
+              </div>
+              <div class="card-content">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Cossacks_in_Red_Square_2005.jpg/800px-Cossacks_in_Red_Square_2005.jpg" alt="Казачий круг" class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300">Традиционное собрание казаков для решения важных вопросов и обсуждения планов.</p>
+              </div>
+            </div>
+            <div class="card bg-gray-50 dark:bg-gray-700">
+              <div class="card-header">
+                <h3 class="card-title text-lg">День войска</h3>
+              </div>
+              <div class="card-content">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cossack_parade_in_Novocherkassk_2013.jpg/800px-Cossack_parade_in_Novocherkassk_2013.jpg" alt="День войска" class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300">Празднование годовщины образования войска с парадами, концертами и спортивными мероприятиями.</p>
+              </div>
+            </div>
+            <div class="card bg-gray-50 dark:bg-gray-700">
+              <div class="card-header">
+                <h3 class="card-title text-lg">Рождество</h3>
+              </div>
+              <div class="card-content">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Christmas_in_Russia.jpg/800px-Christmas_in_Russia.jpg" alt="Рождество" class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300">Традиционные рождественские колядки, богослужения и семейные праздники.</p>
+              </div>
+            </div>
+            <div class="card bg-gray-50 dark:bg-gray-700">
+              <div class="card-header">
+                <h3 class="card-title text-lg">Покров</h3>
+              </div>
+              <div class="card-content">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Intercession_of_the_Theotokos_icon_%28Novgorod%2C_1400s%29.jpg/800px-Intercession_of_the_Theotokos_icon_%28Novgorod%2C_1400s%29.jpg" alt="Покров" class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300">Праздник Покрова Пресвятой Богородицы с молебнами и народными гуляниями.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modern Section -->
+    <section id="modern-section" class="space-y-6" style="display: none;">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Современное состояние</h2>
+        </div>
+        <div class="card-content">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <p>
+                Сегодня Астраханское казачье войско активно участвует в общественной жизни региона. Казаки играют важную роль в патриотическом воспитании молодежи, охране общественного порядка и сохранении культурных традиций.
+              </p>
+              <p>
+                Войско насчитывает несколько тысяч человек, объединенных в станичные общества. Эти общества занимаются организацией мероприятий, поддержкой ветеранов и развитием казачьей культуры.
+              </p>
+              <p>
+                Казаки также участвуют в военно-полевых сборах, где отрабатывают навыки верховой езды, стрельбы и рукопашного боя. Эти сборы помогают поддерживать боевую готовность и укреплять связи между казаками.
+              </p>
+              <p>
+                Важным направлением деятельности казаков является социальная работа. Они помогают нуждающимся, организуют благотворительные акции и участвуют в волонтерских проектах.
+              </p>
+              <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%B5%D1%81%D1%82%D1%80%D0%BE%D0%B2%D0%BE%D0%B5_%D0%BA%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B5_%D0%B2%D0%BE%D0%B9%D1%81%D0%BA%D0%BE" class="wiki-link" target="_blank">
+                <i class="fab fa-wikipedia-w mr-2"></i> Узнать о современном казачестве
+              </a>
+            </div>
+            <div class="flex justify-center">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Modern_Russian_Cossacks.jpg/800px-Modern_Russian_Cossacks.jpg" alt="Современные казаки" class="rounded-lg shadow-md w-full h-auto object-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Основные направления деятельности</h2>
+        </div>
+        <div class="card-content">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="flex items-center space-x-2 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
+              <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
+                <i class="fas fa-flag"></i>
+              </div>
+              <p>Патриотическое воспитание молодежи через участие в военно-патриотических клубах и лагерях.</p>
+            </div>
+            <div class="flex items-center space-x-2 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
+              <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <p>Охрана общественного порядка на массовых мероприятиях и в общественных местах.</p>
+            </div>
+            <div class="flex items-center space-x-2 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
+              <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
+                <i class="fas fa-book"></i>
+              </div>
+              <p>Сохранение и популяризация казачьих традиций через проведение культурных мероприятий и фестивалей.</p>
+            </div>
+            <div class="flex items-center space-x-2 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
+              <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
+                <i class="fas fa-campground"></i>
+              </div>
+              <p>Военно-полевые сборы для поддержания боевой готовности и обучения молодых казаков.</p>
+            </div>
+            <div class="flex items-center space-x-2 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
+              <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
+                <i class="fas fa-music"></i>
+              </div>
+              <p>Организация культурных мероприятий, концертов и выставок, посвященных казачьей культуре.</p>
+            </div>
+            <div class="flex items-center space-x-2 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
+              <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
+                <i class="fas fa-hands-helping"></i>
+              </div>
+              <p>Социальная работа и помощь нуждающимся, участие в благотворительных акциях и волонтерских проектах.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery-section" class="space-y-6" style="display: none;">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Галерея</h2>
+          <p class="card-description">Фотографии из жизни астраханских казаков</p>
+        </div>
+        <div class="card-content">
+          <div class="gallery-container">
+            <div class="gallery-slide active">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Astrakhan_Cossacks_1880s.jpg/800px-Astrakhan_Cossacks_1880s.jpg" alt="Астраханские казаки в 1880-х" class="w-full rounded-lg shadow-md">
+              <p class="text-center mt-2 text-sm">Астраханские казаки в 1880-х годах</p>
+            </div>
+            <div class="gallery-slide">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" alt="Казачий танец" class="w-full rounded-lg shadow-md">
+              <p class="text-center mt-2 text-sm">Традиционный казачий танец</p>
+            </div>
+            <div class="gallery-slide">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Modern_Russian_Cossacks.jpg/800px-Modern_Russian_Cossacks.jpg" alt="Современные казаки" class="w-full rounded-lg shadow-md">
+              <p class="text-center mt-2 text-sm">Современные казаки на параде</p>
+            </div>
+            <div class="gallery-slide">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cossack_parade_in_Novocherkassk_2013.jpg/800px-Cossack_parade_in_Novocherkassk_2013.jpg" alt="Казачий парад" class="w-full rounded-lg shadow-md">
+              <p class="text-center mt-2 text-sm">Казачий парад в Новочеркасске</p>
+            </div>
+            <div class="gallery-slide">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Cossacks_in_Red_Square_2005.jpg/800px-Cossacks_in_Red_Square_2005.jpg" alt="Казаки в Москве" class="w-full rounded-lg shadow-md">
+              <p class="text-center mt-2 text-sm">Казаки на Красной площади</p>
+            </div>
+            <div class="gallery-nav">
+              <span class="gallery-dot active" onclick="currentSlide(0)"></span>
+              <span class="gallery-dot" onclick="currentSlide(1)"></span>
+              <span class="gallery-dot" onclick="currentSlide(2)"></span>
+              <span class="gallery-dot" onclick="currentSlide(3)"></span>
+              <span class="gallery-dot" onclick="currentSlide(4)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news-section" class="space-y-6" style="display: none;">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Новости</h2>
+          <p class="card-description">События и мероприятия астраханского казачества</p>
+        </div>
+        <div class="card-content">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-6">
+              <div class="card bg-gray-50 hover:bg-gray-100 transition-colors">
+                <div class="card-header">
+                  <h3 class="card-title text-lg">Казачий круг в Астрахани</h3>
+                  <p class="card-description">15 мая 2023</p>
+                </div>
+                <div class="card-content">
+                  <p>В Астрахани прошел ежегодный сбор казаков, посвященный памяти предков. На мероприятии присутствовало более 500 представителей казачества со всего региона. Казаки обсудили важные вопросы, связанные с развитием казачьих общин и сохранением традиций.</p>
+                  <a href="#" class="wiki-link mt-2 inline-block">
+                    <i class="fas fa-external-link-alt mr-2"></i> Читать полностью
+                  </a>
+                </div>
+              </div>
+              <div class="card bg-gray-50 hover:bg-gray-100 transition-colors">
+                <div class="card-header">
+                  <h3 class="card-title text-lg">Фестиваль казачьей культуры</h3>
+                  <p class="card-description">22 июня 2023</p>
+                </div>
+                <div class="card-content">
+                  <p>В регионе состоялся крупный фестиваль с участием творческих коллективов. Гости могли познакомиться с традиционными ремеслами, кухней и музыкой казаков. Фестиваль прошел при поддержке местных властей и казачьих обществ.</p>
+                  <a href="#" class="wiki-link mt-2 inline-block">
+                    <i class="fas fa-external-link-alt mr-2"></i> Читать полностью
+                  </a>
+                </div>
+              </div>
+              <div class="card bg-gray-50 hover:bg-gray-100 transition-colors">
+                <div class="card-header">
+                  <h3 class="card-title text-lg">Открытие нового музея</h3>
+                  <p class="card-description">10 сентября 2023</p>
+                </div>
+                <div class="card-content">
+                  <p>В одной из станиц открылся музей истории астраханского казачества. В экспозиции представлены уникальные экспонаты XIX-XX веков, рассказывающие о жизни и деятельности казаков.</p>
+                  <a href="#" class="wiki-link mt-2 inline-block">
+                    <i class="fas fa-external-link-alt mr-2"></i> Читать полностью
+                  </a>
+                </div>
+              </div>
+              <div class="card bg-gray-50 hover:bg-gray-100 transition-colors">
+                <div class="card-header">
+                  <h3 class="card-title text-lg">Военно-полевые сборы</h3>
+                  <p class="card-description">5 октября 2023</p>
+                </div>
+                <div class="card-content">
+                  <p>Казаки приняли участие в традиционных военных учениях. В программе были занятия по верховой езде, стрельбе и рукопашному бою. Учения прошли успешно, и казаки продемонстрировали высокий уровень подготовки.</p>
+                  <a href="#" class="wiki-link mt-2 inline-block">
+                    <i class="fas fa-external-link-alt mr-2"></i> Читать полностью
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col space-y-4">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cossack_parade_in_Novocherkassk_2013.jpg/800px-Cossack_parade_in_Novocherkassk_2013.jpg" alt="Казачий парад" class="rounded-lg shadow-md w-full h-64 object-cover">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" alt="Казачий танец" class="rounded-lg shadow-md w-full h-64 object-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section id="contacts-section" class="space-y-6" style="display: none;">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Контакты</h2>
+          <p class="card-description">Как связаться с представителями астраханского казачества</p>
+        </div>
+        <div class="card-content">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div>
+                <h3 class="font-bold text-lg">Адрес</h3>
+                <p>414000, г. Астрахань, ул. Казачья, д. 15</p>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg">Телефон</h3>
+                <p>+7 (8512) 123-456</p>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg">Электронная почта</h3>
+                <p>info@astrakhan-cossacks.ru</p>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg">Социальные сети</h3>
+                <div class="flex space-x-4">
+                  <a href="#" class="text-blue-500 hover:underline">
+                    <i class="fab fa-vk"></i>
+                  </a>
+                  <a href="#" class="text-blue-400 hover:underline">
+                    <i class="fab fa-telegram"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2413.185616418685!2d48.03609731580208!3d46.34517997910059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40e3d228f64b3b33%3A0x93e3f55f5c4f24d0!2z0JrQvtC70YzRiNCw0Y8g0KXQsNGA0YzQutCwINCc0L7RgNCw0LQ!5e0!3m2!1sru!2sru!4v1638243909787!5m2!1sru!2sru" class="map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-6">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2025 Астраханское Казачество. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('section').forEach(section => {
+        section.style.display = section.id === `${sectionId}-section` ? 'block' : 'none';
+      });
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-theme');
+    }
+
+    function currentSlide(index) {
+      const slides = document.querySelectorAll('.gallery-slide');
+      const dots = document.querySelectorAll('.gallery-dot');
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+  </script>
+</body>
+</html>
