@@ -37,12 +37,12 @@
     }
 
     .highlight {
-      color: #8B0000; /* Бордовый */
+      color: #8B0000;
       font-weight: bold;
     }
 
     body.dark-theme .highlight {
-      color: #D4AF37; /* Золотой */
+      color: #D4AF37;
     }
 
     /* Button styles */
@@ -56,7 +56,7 @@
     }
 
     .btn-default {
-      background-color: #8B0000; /* Бордовый */
+      background-color: #8B0000;
       color: white;
     }
 
@@ -65,7 +65,7 @@
     }
 
     body.dark-theme .btn-default {
-      background-color: #D4AF37; /* Золотой */
+      background-color: #D4AF37;
       color: #333;
     }
 
@@ -345,6 +345,112 @@
       color: #C9A227;
     }
 
+    /* Quiz styles */
+    .quiz-container {
+      background-color: #f5f5f5;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    body.dark-theme .quiz-container {
+      background-color: #2d2d2d;
+    }
+
+    .quiz-question {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-option {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .quiz-option:hover {
+      background-color: rgba(139, 0, 0, 0.1);
+    }
+
+    body.dark-theme .quiz-option:hover {
+      background-color: rgba(212, 175, 55, 0.1);
+    }
+
+    .quiz-option.selected {
+      background-color: rgba(139, 0, 0, 0.2);
+    }
+
+    body.dark-theme .quiz-option.selected {
+      background-color: rgba(212, 175, 55, 0.2);
+    }
+
+    .quiz-result {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 0.25rem;
+      display: none;
+    }
+
+    .quiz-result.correct {
+      background-color: rgba(0, 128, 0, 0.2);
+      display: block;
+    }
+
+    .quiz-result.incorrect {
+      background-color: rgba(255, 0, 0, 0.2);
+      display: block;
+    }
+
+    /* Interactive image map */
+    .image-map-container {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .image-map {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+
+    .image-map-point {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(139, 0, 0, 0.7);
+      border-radius: 50%;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      transition: all 0.3s;
+    }
+
+    body.dark-theme .image-map-point {
+      background-color: rgba(212, 175, 55, 0.7);
+    }
+
+    .image-map-point:hover {
+      transform: translate(-50%, -50%) scale(1.3);
+    }
+
+    .image-map-tooltip {
+      position: absolute;
+      background-color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 10;
+      display: none;
+      max-width: 200px;
+    }
+
+    body.dark-theme .image-map-tooltip {
+      background-color: #1e1e1e;
+    }
+
     /* Responsive adjustments */
     @media screen and (max-width: 768px) {
       .timeline::after {
@@ -380,7 +486,7 @@
 </head>
 <body class="min-h-screen bg-white text-gray-900">
   <!-- Header -->
-  <header class="sticky top-0 z-50 bg-white shadow-md transition-colors duration-300 dark-theme:bg-gray-800">
+  <header class="sticky top-0 z-50 bg-white shadow-md transition-colors duration-300 dark:bg-gray-800">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-4">
         <img src="https://www.ria1914.info/images/thumb/0/06/%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B5_%D0%B2%D0%BE%D0%B9%D1%81%D0%BA%D0%BE%2C_%D0%B7%D0%BD%D0%B0%D0%BA.jpg/250px-%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B5_%D0%B2%D0%BE%D0%B9%D1%81%D0%BA%D0%BE%2C_%D0%B7%D0%BD%D0%B0%D0%BA.jpg" 
@@ -417,7 +523,7 @@
   </header>
 
   <!-- Mobile Navigation -->
-  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg transition-colors duration-300 dark-theme:bg-gray-800">
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg transition-colors duration-300 dark:bg-gray-800">
     <div class="flex justify-around py-2">
       <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('history')">
         <i class="fas fa-landmark mb-1"></i>
@@ -521,6 +627,31 @@
           </div>
         </div>
       </div>
+      
+      <!-- Добавлен интерактивный тест -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Проверьте свои знания</h2>
+          <p class="card-description">Пройдите небольшой тест по истории Астраханского казачества</p>
+        </div>
+        <div class="card-content">
+          <div class="quiz-container">
+            <div class="quiz-question">1. В каком году было образовано Астраханское казачье войско?</div>
+            <div class="quiz-option" onclick="checkAnswer(this, '1817', 'Правильно! Астраханское казачье войско было образовано в 1817 году указом императора Александра I.')">1817</div>
+            <div class="quiz-option" onclick="checkAnswer(this, '1709', 'Неверно. Попробуйте еще раз.')">1709</div>
+            <div class="quiz-option" onclick="checkAnswer(this, '1860', 'Неверно. В 1860 году была проведена реформа казачьих войск.')">1860</div>
+            <div class="quiz-result"></div>
+          </div>
+          
+          <div class="quiz-container mt-4">
+            <div class="quiz-question">2. Какова была основная задача Астраханского казачьего войска?</div>
+            <div class="quiz-option" onclick="checkAnswer(this, 'trade', 'Неверно. Хотя казаки действительно охраняли торговые пути, это не было их основной задачей.')">Охрана торговых путей</div>
+            <div class="quiz-option" onclick="checkAnswer(this, 'border', 'Правильно! Основной задачей была защита южных границ Российской империи.')">Защита южных границ</div>
+            <div class="quiz-option" onclick="checkAnswer(this, 'fishing', 'Неверно. Хотя казаки занимались рыболовством, это было их хозяйственной деятельностью, а не основной задачей.')">Развитие рыболовства</div>
+            <div class="quiz-result"></div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Culture Section -->
@@ -618,6 +749,23 @@
           </div>
         </div>
       </div>
+      
+      <!-- Добавлена интерактивная карта элементов казачьей культуры -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Элементы казачьей культуры</h2>
+          <p class="card-description">Нажмите на точки, чтобы узнать больше</p>
+        </div>
+        <div class="card-content">
+          <div class="image-map-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" alt="Казачья культура" class="image-map">
+            <div class="image-map-point" style="top: 30%; left: 20%;" onmouseover="showTooltip(this, 'Казачья шашка - традиционное оружие казаков')" onmouseout="hideTooltip(this)"></div>
+            <div class="image-map-point" style="top: 60%; left: 50%;" onmouseover="showTooltip(this, 'Папаха - традиционный головной убор')" onmouseout="hideTooltip(this)"></div>
+            <div class="image-map-point" style="top: 40%; left: 70%;" onmouseover="showTooltip(this, 'Черкеска - традиционная верхняя одежда')" onmouseout="hideTooltip(this)"></div>
+            <div class="image-map-tooltip"></div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Modern Section -->
@@ -694,6 +842,34 @@
               </div>
               <p>Социальная работа и помощь нуждающимся, участие в благотворительных акциях и волонтерских проектах.</p>
             </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Добавлена форма обратной связи -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Присоединиться к казачеству</h2>
+          <p class="card-description">Заполните форму, если хотите узнать больше о вступлении</p>
+        </div>
+        <div class="card-content">
+          <form id="join-form" class="space-y-4">
+            <div>
+              <label for="name" class="block mb-1">Ваше имя</label>
+              <input type="text" id="name" class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600" required>
+            </div>
+            <div>
+              <label for="email" class="block mb-1">Email</label>
+              <input type="email" id="email" class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600" required>
+            </div>
+            <div>
+              <label for="message" class="block mb-1">Ваше сообщение</label>
+              <textarea id="message" rows="4" class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default">Отправить</button>
+          </form>
+          <div id="form-success" class="hidden mt-4 p-4 bg-green-100 text-green-800 rounded dark:bg-green-900 dark:text-green-200">
+            Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.
           </div>
         </div>
       </div>
@@ -862,16 +1038,38 @@
 
   <!-- Scripts -->
   <script>
+    // Показ секций
     function showSection(sectionId) {
       document.querySelectorAll('section').forEach(section => {
         section.style.display = section.id === `${sectionId}-section` ? 'block' : 'none';
       });
+      
+      // Обновляем активные кнопки в навигации
+      document.querySelectorAll('.btn-default').forEach(btn => {
+        btn.classList.remove('btn-default');
+        btn.classList.add('btn-ghost');
+      });
+      
+      // Делаем активной текущую кнопку
+      const activeBtn = document.querySelector(`button[onclick="showSection('${sectionId}')"]`);
+      if (activeBtn) {
+        activeBtn.classList.remove('btn-ghost');
+        activeBtn.classList.add('btn-default');
+      }
     }
 
+    // Переключение темы
     function toggleDarkMode() {
       document.body.classList.toggle('dark-theme');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));
     }
 
+    // Проверка сохраненной темы при загрузке
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-theme');
+    }
+
+    // Галерея
     function currentSlide(index) {
       const slides = document.querySelectorAll('.gallery-slide');
       const dots = document.querySelectorAll('.gallery-dot');
@@ -882,6 +1080,61 @@
         dot.classList.toggle('active', i === index);
       });
     }
+
+    // Автоматическое переключение слайдов галереи
+    let slideIndex = 0;
+    function autoSlide() {
+      const slides = document.querySelectorAll('.gallery-slide');
+      slideIndex = (slideIndex + 1) % slides.length;
+      currentSlide(slideIndex);
+    }
+    
+    // Запускаем автоматическое переключение только если галерея видна
+    setInterval(() => {
+      if (document.getElementById('gallery-section').style.display === 'block') {
+        autoSlide();
+      }
+    }, 5000);
+
+    // Проверка ответов в тесте
+    function checkAnswer(element, correctAnswer, message) {
+      const options = element.parentElement.querySelectorAll('.quiz-option');
+      options.forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      
+      const resultDiv = element.parentElement.querySelector('.quiz-result');
+      resultDiv.textContent = message;
+      resultDiv.className = 'quiz-result ' + 
+        (element.textContent.trim() === correctAnswer || element.getAttribute('onclick').includes(correctAnswer) ? 'correct' : 'incorrect');
+    }
+
+    // Интерактивная карта изображения
+    function showTooltip(point, text) {
+      const tooltip = document.querySelector('.image-map-tooltip');
+      tooltip.textContent = text;
+      tooltip.style.display = 'block';
+      
+      const rect = point.getBoundingClientRect();
+      tooltip.style.top = `${rect.top - 40}px`;
+      tooltip.style.left = `${rect.left}px`;
+    }
+
+    function hideTooltip() {
+      document.querySelector('.image-map-tooltip').style.display = 'none';
+    }
+
+    // Обработка формы
+    document.getElementById('join-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Здесь можно добавить отправку формы на сервер
+      this.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    });
+
+    // Показываем первую секцию при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+      showSection('history');
+    });
   </script>
 </body>
 </html>
