@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Астраханское Казачество</title>
+  <meta http-equiv="content-language" content="ru, en">
+  <title>Астраханское Казачество | Astrakhan Cossacks</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -122,6 +123,7 @@
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       transition: transform 0.3s, box-shadow 0.3s;
       background-color: white;
+      margin-bottom: 1.5rem;
     }
 
     body.dark-theme .card {
@@ -451,8 +453,201 @@
       background-color: #1e1e1e;
     }
 
+    /* Settlement map styles */
+    .settlement-map-container {
+      position: relative;
+      height: 500px;
+      margin: 1rem 0;
+    }
+
+    .settlement-map {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.5rem;
+    }
+
+    .map-point {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: rgba(139, 0, 0, 0.7);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s;
+      transform: translate(-50%, -50%);
+    }
+
+    body.dark-theme .map-point {
+      background: rgba(212, 175, 55, 0.7);
+    }
+
+    .map-point:hover {
+      transform: translate(-50%, -50%) scale(1.5);
+    }
+
+    .map-tooltip {
+      position: absolute;
+      background-color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      z-index: 100;
+      display: none;
+      max-width: 200px;
+      pointer-events: none;
+    }
+
+    body.dark-theme .map-tooltip {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+    }
+
+    /* Language switcher */
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* 3D Artifact Gallery */
+    .artifact-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      perspective: 1000px;
+      margin: 30px 0;
+    }
+    
+    .artifact {
+      position: relative;
+      width: 250px;
+      height: 300px;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+      cursor: pointer;
+      margin: 0 auto;
+    }
+    
+    .artifact-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      background: white;
+    }
+    
+    body.dark-theme .artifact-face {
+      background: #1e1e1e;
+      color: #e0e0e0;
+    }
+    
+    .artifact-front {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    
+    body.dark-theme .artifact-front {
+      background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    }
+    
+    .artifact-back {
+      background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+      transform: rotateY(180deg);
+    }
+    
+    body.dark-theme .artifact-back {
+      background: linear-gradient(135deg, #5F0A87 0%, #1E3A8A 100%);
+    }
+    
+    .artifact img {
+      max-width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+    }
+    
+    .artifact:hover {
+      transform: rotateY(180deg);
+    }
+
+    /* Voice Assistant */
+    .voice-assistant {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    
+    .voice-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #8B0000;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+    }
+    
+    body.dark-theme .voice-btn {
+      background: #D4AF37;
+      color: #333;
+    }
+    
+    .voice-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .voice-btn.listening {
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(139, 0, 0, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(139, 0, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(139, 0, 0, 0); }
+    }
+    
+    body.dark-theme .voice-btn.listening {
+      animation: pulseDark 1.5s infinite;
+    }
+    
+    @keyframes pulseDark {
+      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeInUp 0.5s forwards;
+    }
+
     /* Responsive adjustments */
     @media screen and (max-width: 768px) {
+      .container {
+        width: 95%;
+      }
+      
       .timeline::after {
         left: 31px;
       }
@@ -481,10 +676,44 @@
       .right {
         left: 0%;
       }
+      
+      .settlement-map-container {
+        height: 300px;
+      }
+      
+      .card {
+        margin: 0.5rem 0;
+        padding: 0.75rem;
+      }
+      
+      .card-content {
+        padding: 0.75rem;
+      }
+
+      .artifact-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media screen and (max-width: 480px) {
+      .lang-switcher {
+        top: 10px;
+        right: 10px;
+      }
+      
+      .settlement-map-container {
+        height: 250px;
+      }
     }
   </style>
 </head>
 <body class="min-h-screen bg-white text-gray-900">
+  <!-- Language Switcher -->
+  <div class="lang-switcher">
+    <button onclick="switchLanguage('ru')" class="btn btn-sm btn-default">RU</button>
+    <button onclick="switchLanguage('en')" class="btn btn-sm btn-outline">EN</button>
+  </div>
+
   <!-- Header -->
   <header class="sticky top-0 z-50 bg-white shadow-md transition-colors duration-300 dark:bg-gray-800">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -492,31 +721,46 @@
         <img src="https://www.ria1914.info/images/thumb/0/06/%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B5_%D0%B2%D0%BE%D0%B9%D1%81%D0%BA%D0%BE%2C_%D0%B7%D0%BD%D0%B0%D0%BA.jpg/250px-%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B5_%D0%B2%D0%BE%D0%B9%D1%81%D0%BA%D0%BE%2C_%D0%B7%D0%BD%D0%B0%D0%BA.jpg" 
            alt="Герб Астраханского Казачества" 
            class="w-16 h-16 object-contain">
-        <h1 class="text-xl font-bold">Астраханское Казачество</h1>
+        <h1 class="text-xl font-bold lang-ru">Астраханское Казачество</h1>
+        <h1 class="text-xl font-bold lang-en" style="display:none">Astrakhan Cossacks</h1>
       </div>
       <div class="flex items-center space-x-4">
         <nav class="hidden md:flex space-x-4">
           <button class="btn btn-default px-4 py-2 font-medium" onclick="showSection('history')">
-            <i class="fas fa-landmark mr-2"></i>История
+            <i class="fas fa-landmark mr-2"></i>
+            <span class="lang-ru">История</span>
+            <span class="lang-en" style="display:none">History</span>
           </button>
           <button class="btn btn-ghost px-4 py-2 font-medium hover:bg-red-50 dark:hover:bg-yellow-900" onclick="showSection('culture')">
-            <i class="fas fa-music mr-2"></i>Культура
+            <i class="fas fa-music mr-2"></i>
+            <span class="lang-ru">Культура</span>
+            <span class="lang-en" style="display:none">Culture</span>
           </button>
           <button class="btn btn-ghost px-4 py-2 font-medium hover:bg-red-50 dark:hover:bg-yellow-900" onclick="showSection('modern')">
-            <i class="fas fa-users mr-2"></i>Современность
+            <i class="fas fa-users mr-2"></i>
+            <span class="lang-ru">Современность</span>
+            <span class="lang-en" style="display:none">Modern Day</span>
           </button>
           <button class="btn btn-ghost px-4 py-2 font-medium hover:bg-red-50 dark:hover:bg-yellow-900" onclick="showSection('gallery')">
-            <i class="fas fa-images mr-2"></i>Галерея
+            <i class="fas fa-images mr-2"></i>
+            <span class="lang-ru">Галерея</span>
+            <span class="lang-en" style="display:none">Gallery</span>
           </button>
           <button class="btn btn-ghost px-4 py-2 font-medium hover:bg-red-50 dark:hover:bg-yellow-900" onclick="showSection('news')">
-            <i class="fas fa-newspaper mr-2"></i>Новости
+            <i class="fas fa-newspaper mr-2"></i>
+            <span class="lang-ru">Новости</span>
+            <span class="lang-en" style="display:none">News</span>
           </button>
           <button class="btn btn-ghost px-4 py-2 font-medium hover:bg-red-50 dark:hover:bg-yellow-900" onclick="showSection('contacts')">
-            <i class="fas fa-envelope mr-2"></i>Контакты
+            <i class="fas fa-envelope mr-2"></i>
+            <span class="lang-ru">Контакты</span>
+            <span class="lang-en" style="display:none">Contacts</span>
           </button>
         </nav>
         <button class="btn btn-outline px-4 py-2 font-medium" onclick="toggleDarkMode()">
-          <i class="fas fa-moon mr-2"></i>Тема
+          <i class="fas fa-moon mr-2"></i>
+          <span class="lang-ru">Тема</span>
+          <span class="lang-en" style="display:none">Theme</span>
         </button>
       </div>
     </div>
@@ -527,29 +771,35 @@
     <div class="flex justify-around py-2">
       <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('history')">
         <i class="fas fa-landmark mb-1"></i>
-        <span>История</span>
+        <span class="lang-ru">История</span>
+        <span class="lang-en" style="display:none">History</span>
       </button>
       <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('culture')">
         <i class="fas fa-music mb-1"></i>
-        <span>Культура</span>
+        <span class="lang-ru">Культура</span>
+        <span class="lang-en" style="display:none">Culture</span>
       </button>
       <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('modern')">
         <i class="fas fa-users mb-1"></i>
-        <span>Современность</span>
+        <span class="lang-ru">Современность</span>
+        <span class="lang-en" style="display:none">Modern</span>
       </button>
     </div>
     <div class="flex justify-around py-2">
       <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('gallery')">
         <i class="fas fa-images mb-1"></i>
-        <span>Галерея</span>
+        <span class="lang-ru">Галерея</span>
+        <span class="lang-en" style="display:none">Gallery</span>
       </button>
       <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('news')">
         <i class="fas fa-newspaper mb-1"></i>
-        <span>Новости</span>
+        <span class="lang-ru">Новости</span>
+        <span class="lang-en" style="display:none">News</span>
       </button>
       <button class="btn btn-ghost btn-sm flex flex-col items-center" onclick="showSection('contacts')">
         <i class="fas fa-envelope mb-1"></i>
-        <span>Контакты</span>
+        <span class="lang-ru">Контакты</span>
+        <span class="lang-en" style="display:none">Contacts</span>
       </button>
     </div>
   </div>
@@ -558,96 +808,174 @@
   <main class="container mx-auto px-4 py-8 pb-20 md:pb-8">
     <!-- History Section -->
     <section id="history-section" class="space-y-6">
-      <div class="card">
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">История Астраханского Казачества</h2>
+          <h2 class="card-title lang-ru">История Астраханского Казачества</h2>
+          <h2 class="card-title lang-en" style="display:none">History of Astrakhan Cossacks</h2>
         </div>
         <div class="card-content">
           <div class="grid md:grid-cols-2 gap-6">
             <div class="space-y-4">
-              <p>
+              <p class="lang-ru">
                 Астраханское казачье войско было образовано в 1817 году для защиты южных границ Российской империи. Оно сыграло важную роль в обеспечении безопасности региона, охраняя торговые пути и участвуя в военных кампаниях.
               </p>
-              <p>
+              <p class="lang-en" style="display:none">
+                The Astrakhan Cossack Host was established in 1817 to protect the southern borders of the Russian Empire. It played an important role in ensuring the security of the region, guarding trade routes and participating in military campaigns.
+              </p>
+              <p class="lang-ru">
                 Казаки несли службу по охране торговых путей, участвовали в военных кампаниях и занимались рыболовством. Их деятельность была разнообразной и включала участие в Кавказской войне, реформы казачьих войск и многое другое.
               </p>
-              <p>
+              <p class="lang-en" style="display:none">
+                The Cossacks served to protect trade routes, participated in military campaigns and engaged in fishing. Their activities were diverse and included participation in the Caucasian War, reforms of the Cossack troops and much more.
+              </p>
+              <p class="lang-ru">
                 В начале XX века войско насчитывало около 40 тысяч человек, проживавших в станицах вдоль Волги. Казаки активно участвовали в жизни региона, занимаясь сельским хозяйством, ремеслами и торговлей.
               </p>
-              <p>
+              <p class="lang-en" style="display:none">
+                At the beginning of the 20th century, the Host numbered about 40 thousand people living in villages along the Volga. The Cossacks actively participated in the life of the region, engaged in agriculture, crafts and trade.
+              </p>
+              <p class="lang-ru">
                 После революции 1917 года войско было упразднено, но в 1991 году казачество было возрождено в новых условиях. Сегодня астраханские казаки продолжают традиции своих предков, занимаясь патриотическим воспитанием молодежи и сохранением культурного наследия.
               </p>
+              <p class="lang-en" style="display:none">
+                After the 1917 revolution, the Host was abolished, but in 1991 the Cossacks were revived under new conditions. Today, the Astrakhan Cossacks continue the traditions of their ancestors, engaging in patriotic education of youth and preserving cultural heritage.
+              </p>
               <a href="https://ru.wikipedia.org/wiki/%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B5_%D0%B2%D0%BE%D0%B9%D1%81%D0%BA%D0%BE" class="wiki-link" target="_blank">
-                <i class="fab fa-wikipedia-w mr-2"></i> Узнать больше в Википедии
+                <i class="fab fa-wikipedia-w mr-2"></i> 
+                <span class="lang-ru">Узнать больше в Википедии</span>
+                <span class="lang-en" style="display:none">Learn more on Wikipedia</span>
               </a>
             </div>
             <div class="flex justify-center">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Astrakhan_Cossacks_1880s.jpg/800px-Astrakhan_Cossacks_1880s.jpg" alt="Астраханские казаки в 1880-х годах" class="rounded-lg shadow-md w-full h-auto object-cover">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Astrakhan_Cossacks_1880s.jpg/800px-Astrakhan_Cossacks_1880s.jpg" 
+                   alt="Астраханские казаки в 1880-х годах" 
+                   class="rounded-lg shadow-md w-full h-auto object-cover">
             </div>
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">Хронология важных событий</h2>
+          <h2 class="card-title lang-ru">Хронология важных событий</h2>
+          <h2 class="card-title lang-en" style="display:none">Timeline of Key Events</h2>
         </div>
         <div class="card-content">
           <div class="timeline">
             <div class="timeline-item left">
               <div class="timeline-content">
-                <h3 class="font-bold">1817 год</h3>
-                <p>Образование Астраханского казачьего войска указом императора Александра I. Войско было создано для защиты южных границ и поддержания порядка в регионе.</p>
+                <h3 class="font-bold">1817</h3>
+                <p class="lang-ru">Образование Астраханского казачьего войска указом императора Александра I. Войско было создано для защиты южных границ и поддержания порядка в регионе.</p>
+                <p class="lang-en" style="display:none">Establishment of the Astrakhan Cossack Host by decree of Emperor Alexander I. The Host was created to protect the southern borders and maintain order in the region.</p>
               </div>
             </div>
             <div class="timeline-item right">
               <div class="timeline-content">
-                <h3 class="font-bold">1830-е годы</h3>
-                <p>Активное участие казаков в Кавказской войне. Казаки проявили себя как отличные воины, защищая интересы Российской империи.</p>
+                <h3 class="font-bold">1830s</h3>
+                <p class="lang-ru">Активное участие казаков в Кавказской войне. Казаки проявили себя как отличные воины, защищая интересы Российской империи.</p>
+                <p class="lang-en" style="display:none">Active participation of Cossacks in the Caucasian War. The Cossacks proved themselves as excellent warriors, defending the interests of the Russian Empire.</p>
               </div>
             </div>
             <div class="timeline-item left">
               <div class="timeline-content">
-                <h3 class="font-bold">1860 год</h3>
-                <p>Реформа казачьих войск, утверждение нового положения. В этот период были внесены изменения в структуру и управление войском.</p>
+                <h3 class="font-bold">1860</h3>
+                <p class="lang-ru">Реформа казачьих войск, утверждение нового положения. В этот период были внесены изменения в структуру и управление войском.</p>
+                <p class="lang-en" style="display:none">Reform of the Cossack troops, approval of a new regulation. During this period, changes were made to the structure and management of the Host.</p>
               </div>
             </div>
             <div class="timeline-item right">
               <div class="timeline-content">
-                <h3 class="font-bold">1918 год</h3>
-                <p>Упразднение войска после революции. Казачьи формирования были распущены, и многие казаки пострадали от репрессий.</p>
+                <h3 class="font-bold">1918</h3>
+                <p class="lang-ru">Упразднение войска после революции. Казачьи формирования были распущены, и многие казаки пострадали от репрессий.</p>
+                <p class="lang-en" style="display:none">Abolition of the Host after the revolution. Cossack formations were disbanded, and many Cossacks suffered from repression.</p>
               </div>
             </div>
             <div class="timeline-item left">
               <div class="timeline-content">
-                <h3 class="font-bold">1991 год</h3>
-                <p>Возрождение казачества в новых условиях. В этот период началось восстановление казачьих традиций и обычаев.</p>
+                <h3 class="font-bold">1991</h3>
+                <p class="lang-ru">Возрождение казачества в новых условиях. В этот период началось восстановление казачьих традиций и обычаев.</p>
+                <p class="lang-en" style="display:none">Revival of the Cossacks under new conditions. During this period, the restoration of Cossack traditions and customs began.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Добавлен интерактивный тест -->
-      <div class="card">
+      <!-- Interactive settlement map -->
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">Проверьте свои знания</h2>
-          <p class="card-description">Пройдите небольшой тест по истории Астраханского казачества</p>
+          <h2 class="card-title lang-ru">Карта расселения казаков</h2>
+          <h2 class="card-title lang-en" style="display:none">Cossack Settlement Map</h2>
+          <p class="card-description lang-ru">Нажмите на точки, чтобы узнать больше</p>
+          <p class="card-description lang-en" style="display:none">Click on points to learn more</p>
+        </div>
+        <div class="card-content">
+          <div class="settlement-map-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Astrakhan_Oblast_locator_map.svg/1200px-Astrakhan_Oblast_locator_map.svg.png" 
+                 alt="Карта Астраханской области" 
+                 class="settlement-map">
+            <div class="map-point" style="top:30%; left:25%" 
+                 data-info-ru="Красный Яр - Основан в 1737 г., одна из старейших казачьих станиц"
+                 data-info-en="Krasny Yar - Founded in 1737, one of the oldest Cossack villages"></div>
+            <div class="map-point" style="top:45%; left:60%" 
+                 data-info-ru="Чёрный Яр - Основан в 1627 г., важный стратегический пункт"
+                 data-info-en="Cherny Yar - Founded in 1627, important strategic point"></div>
+            <div class="map-point" style="top:60%; left:40%" 
+                 data-info-ru="Астрахань - Центр казачьего войска с 1817 г."
+                 data-info-en="Astrakhan - Center of the Cossack Host since 1817"></div>
+            <div class="map-point" style="top:70%; left:70%" 
+                 data-info-ru="Енотаевка - Основана в 1742 г., казачья крепость"
+                 data-info-en="Enotaevka - Founded in 1742, Cossack fortress"></div>
+            <div class="map-tooltip"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Quiz -->
+      <div class="card fade-in">
+        <div class="card-header">
+          <h2 class="card-title lang-ru">Проверьте свои знания</h2>
+          <h2 class="card-title lang-en" style="display:none">Test Your Knowledge</h2>
+          <p class="card-description lang-ru">Пройдите небольшой тест по истории Астраханского казачества</p>
+          <p class="card-description lang-en" style="display:none">Take a short quiz about Astrakhan Cossacks history</p>
         </div>
         <div class="card-content">
           <div class="quiz-container">
-            <div class="quiz-question">1. В каком году было образовано Астраханское казачье войско?</div>
-            <div class="quiz-option" onclick="checkAnswer(this, '1817', 'Правильно! Астраханское казачье войско было образовано в 1817 году указом императора Александра I.')">1817</div>
-            <div class="quiz-option" onclick="checkAnswer(this, '1709', 'Неверно. Попробуйте еще раз.')">1709</div>
-            <div class="quiz-option" onclick="checkAnswer(this, '1860', 'Неверно. В 1860 году была проведена реформа казачьих войск.')">1860</div>
+            <div class="quiz-question lang-ru">1. В каком году было образовано Астраханское казачье войско?</div>
+            <div class="quiz-question lang-en" style="display:none">1. In what year was the Astrakhan Cossack Host established?</div>
+            <div class="quiz-option" onclick="checkAnswer(this, '1817', 
+                  'Правильно! Астраханское казачье войско было образовано в 1817 году указом императора Александра I.',
+                  'Correct! The Astrakhan Cossack Host was established in 1817 by decree of Emperor Alexander I.')">1817</div>
+            <div class="quiz-option" onclick="checkAnswer(this, '1709', 
+                  'Неверно. Попробуйте еще раз.',
+                  'Incorrect. Try again.')">1709</div>
+            <div class="quiz-option" onclick="checkAnswer(this, '1860', 
+                  'Неверно. В 1860 году была проведена реформа казачьих войск.',
+                  'Incorrect. In 1860, a reform of the Cossack troops was carried out.')">1860</div>
             <div class="quiz-result"></div>
           </div>
           
           <div class="quiz-container mt-4">
-            <div class="quiz-question">2. Какова была основная задача Астраханского казачьего войска?</div>
-            <div class="quiz-option" onclick="checkAnswer(this, 'trade', 'Неверно. Хотя казаки действительно охраняли торговые пути, это не было их основной задачей.')">Охрана торговых путей</div>
-            <div class="quiz-option" onclick="checkAnswer(this, 'border', 'Правильно! Основной задачей была защита южных границ Российской империи.')">Защита южных границ</div>
-            <div class="quiz-option" onclick="checkAnswer(this, 'fishing', 'Неверно. Хотя казаки занимались рыболовством, это было их хозяйственной деятельностью, а не основной задачей.')">Развитие рыболовства</div>
+            <div class="quiz-question lang-ru">2. Какова была основная задача Астраханского казачьего войска?</div>
+            <div class="quiz-question lang-en" style="display:none">2. What was the main task of the Astrakhan Cossack Host?</div>
+            <div class="quiz-option" onclick="checkAnswer(this, 'trade', 
+                  'Неверно. Хотя казаки действительно охраняли торговые пути, это не было их основной задачей.',
+                  'Incorrect. Although the Cossacks did guard trade routes, this was not their main task.')">
+              <span class="lang-ru">Охрана торговых путей</span>
+              <span class="lang-en" style="display:none">Guarding trade routes</span>
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(this, 'border', 
+                  'Правильно! Основной задачей была защита южных границ Российской империи.',
+                  'Correct! The main task was to protect the southern borders of the Russian Empire.')">
+              <span class="lang-ru">Защита южных границ</span>
+              <span class="lang-en" style="display:none">Protecting southern borders</span>
+            </div>
+            <div class="quiz-option" onclick="checkAnswer(this, 'fishing', 
+                  'Неверно. Хотя казаки занимались рыболовством, это было их хозяйственной деятельностью, а не основной задачей.',
+                  'Incorrect. Although the Cossacks engaged in fishing, this was their economic activity, not their main task.')">
+              <span class="lang-ru">Развитие рыболовства</span>
+              <span class="lang-en" style="display:none">Developing fishing</span>
+            </div>
             <div class="quiz-result"></div>
           </div>
         </div>
@@ -656,112 +984,213 @@
 
     <!-- Culture Section -->
     <section id="culture-section" class="space-y-6" style="display: none;">
-      <div class="card">
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">Культура и традиции</h2>
+          <h2 class="card-title lang-ru">Культура и традиции</h2>
+          <h2 class="card-title lang-en" style="display:none">Culture and Traditions</h2>
         </div>
         <div class="card-content">
           <div class="grid md:grid-cols-2 gap-6">
             <div class="space-y-4">
-              <p>
+              <p class="lang-ru">
                 Культура астраханских казаков представляет собой уникальный сплав русских, калмыцких и татарских традиций. Это результат многовекового соседства и взаимодействия различных народов.
               </p>
-              <p>
+              <p class="lang-en" style="display:none">
+                The culture of the Astrakhan Cossacks is a unique blend of Russian, Kalmyk and Tatar traditions. This is the result of centuries of neighborhood and interaction between different peoples.
+              </p>
+              <p class="lang-ru">
                 Особое место в культуре казаков занимают песни и танцы, которые передавались из поколения в поколение. Эти произведения искусства отражают дух и характер казаков, их любовь к свободе и родной земле.
               </p>
-              <p>
+              <p class="lang-en" style="display:none">
+                Songs and dances, passed down from generation to generation, hold a special place in Cossack culture. These works of art reflect the spirit and character of the Cossacks, their love of freedom and their native land.
+              </p>
+              <p class="lang-ru">
                 Традиционная одежда казаков включала черкески, папахи и сапоги. Эти элементы одежды были не только практичными, но и символизировали принадлежность к казачьему сообществу.
               </p>
-              <p>
+              <p class="lang-en" style="display:none">
+                Traditional Cossack clothing included cherkeskas, papakhas and boots. These clothing items were not only practical but also symbolized belonging to the Cossack community.
+              </p>
+              <p class="lang-ru">
                 Казаки также известны своими ремеслами, такими как изготовление оружия, конской упряжи и предметов быта. Эти навыки передавались от отца к сыну и помогали казакам выживать в суровых условиях.
               </p>
+              <p class="lang-en" style="display:none">
+                The Cossacks are also known for their crafts, such as making weapons, horse harnesses and household items. These skills were passed down from father to son and helped the Cossacks survive in harsh conditions.
+              </p>
               <a href="https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B8_%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D0%B0" class="wiki-link" target="_blank">
-                <i class="fab fa-wikipedia-w mr-2"></i> Узнать больше о казачьей культуре
+                <i class="fab fa-wikipedia-w mr-2"></i> 
+                <span class="lang-ru">Узнать больше о казачьей культуре</span>
+                <span class="lang-en" style="display:none">Learn more about Cossack culture</span>
               </a>
             </div>
             <div class="flex justify-center">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" alt="Казачий танец" class="rounded-lg shadow-md w-full h-auto object-cover">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" 
+                   alt="Казачий танец" 
+                   class="rounded-lg shadow-md w-full h-auto object-cover">
             </div>
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">Традиционные праздники</h2>
+          <h2 class="card-title lang-ru">Традиционные праздники</h2>
+          <h2 class="card-title lang-en" style="display:none">Traditional Holidays</h2>
         </div>
         <div class="card-content">
           <div class="grid md:grid-cols-3 gap-4">
             <div class="card bg-gray-50 dark:bg-gray-700">
               <div class="card-header">
-                <h3 class="card-title text-lg">Пасха</h3>
+                <h3 class="card-title text-lg lang-ru">Пасха</h3>
+                <h3 class="card-title text-lg lang-en" style="display:none">Easter</h3>
               </div>
               <div class="card-content">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Easter_Eggs_-_Stuttgart_-_Germany_2017.jpg/800px-Easter_Eggs_-_Stuttgart_-_Germany_2017.jpg" alt="Пасха" class="w-full h-32 object-cover rounded">
-                <p class="mt-2 text-sm dark:text-gray-300">Традиционные пасхальные гуляния с крашеными яйцами и праздничными богослужениями.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Easter_Eggs_-_Stuttgart_-_Germany_2017.jpg/800px-Easter_Eggs_-_Stuttgart_-_Germany_2017.jpg" 
+                     alt="Пасха" 
+                     class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300 lang-ru">Традиционные пасхальные гуляния с крашеными яйцами и праздничными богослужениями.</p>
+                <p class="mt-2 text-sm dark:text-gray-300 lang-en" style="display:none">Traditional Easter celebrations with painted eggs and festive services.</p>
               </div>
             </div>
             <div class="card bg-gray-50 dark:bg-gray-700">
               <div class="card-header">
-                <h3 class="card-title text-lg">Масленица</h3>
+                <h3 class="card-title text-lg lang-ru">Масленица</h3>
+                <h3 class="card-title text-lg lang-en" style="display:none">Maslenitsa</h3>
               </div>
               <div class="card-content">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Maslenitsa_in_Yaroslavl_2011-12.jpg/800px-Maslenitsa_in_Yaroslavl_2011-12.jpg" alt="Масленица" class="w-full h-32 object-cover rounded">
-                <p class="mt-2 text-sm dark:text-gray-300">Проводы зимы с блинами, народными гуляниями и традиционными играми.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Maslenitsa_in_Yaroslavl_2011-12.jpg/800px-Maslenitsa_in_Yaroslavl_2011-12.jpg" 
+                     alt="Масленица" 
+                     class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300 lang-ru">Проводы зимы с блинами, народными гуляниями и традиционными играми.</p>
+                <p class="mt-2 text-sm dark:text-gray-300 lang-en" style="display:none">Farewell to winter with pancakes, folk festivities and traditional games.</p>
               </div>
             </div>
             <div class="card bg-gray-50 dark:bg-gray-700">
               <div class="card-header">
-                <h3 class="card-title text-lg">Казачий круг</h3>
+                <h3 class="card-title text-lg lang-ru">Казачий круг</h3>
+                <h3 class="card-title text-lg lang-en" style="display:none">Cossack Circle</h3>
               </div>
               <div class="card-content">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Cossacks_in_Red_Square_2005.jpg/800px-Cossacks_in_Red_Square_2005.jpg" alt="Казачий круг" class="w-full h-32 object-cover rounded">
-                <p class="mt-2 text-sm dark:text-gray-300">Традиционное собрание казаков для решения важных вопросов и обсуждения планов.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Cossacks_in_Red_Square_2005.jpg/800px-Cossacks_in_Red_Square_2005.jpg" 
+                     alt="Казачий круг" 
+                     class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300 lang-ru">Традиционное собрание казаков для решения важных вопросов и обсуждения планов.</p>
+                <p class="mt-2 text-sm dark:text-gray-300 lang-en" style="display:none">Traditional gathering of Cossacks to discuss important issues and plans.</p>
               </div>
             </div>
             <div class="card bg-gray-50 dark:bg-gray-700">
               <div class="card-header">
-                <h3 class="card-title text-lg">День войска</h3>
+                <h3 class="card-title text-lg lang-ru">День войска</h3>
+                <h3 class="card-title text-lg lang-en" style="display:none">Host Day</h3>
               </div>
               <div class="card-content">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cossack_parade_in_Novocherkassk_2013.jpg/800px-Cossack_parade_in_Novocherkassk_2013.jpg" alt="День войска" class="w-full h-32 object-cover rounded">
-                <p class="mt-2 text-sm dark:text-gray-300">Празднование годовщины образования войска с парадами, концертами и спортивными мероприятиями.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cossack_parade_in_Novocherkassk_2013.jpg/800px-Cossack_parade_in_Novocherkassk_2013.jpg" 
+                     alt="День войска" 
+                     class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300 lang-ru">Празднование годовщины образования войска с парадами, концертами и спортивными мероприятиями.</p>
+                <p class="mt-2 text-sm dark:text-gray-300 lang-en" style="display:none">Celebration of the anniversary of the Host's formation with parades, concerts and sporting events.</p>
               </div>
             </div>
             <div class="card bg-gray-50 dark:bg-gray-700">
               <div class="card-header">
-                <h3 class="card-title text-lg">Рождество</h3>
+                <h3 class="card-title text-lg lang-ru">Рождество</h3>
+                <h3 class="card-title text-lg lang-en" style="display:none">Christmas</h3>
               </div>
               <div class="card-content">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Christmas_in_Russia.jpg/800px-Christmas_in_Russia.jpg" alt="Рождество" class="w-full h-32 object-cover rounded">
-                <p class="mt-2 text-sm dark:text-gray-300">Традиционные рождественские колядки, богослужения и семейные праздники.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Christmas_in_Russia.jpg/800px-Christmas_in_Russia.jpg" 
+                     alt="Рождество" 
+                     class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300 lang-ru">Традиционные рождественские колядки, богослужения и семейные праздники.</p>
+                <p class="mt-2 text-sm dark:text-gray-300 lang-en" style="display:none">Traditional Christmas caroling, services and family celebrations.</p>
               </div>
             </div>
             <div class="card bg-gray-50 dark:bg-gray-700">
               <div class="card-header">
-                <h3 class="card-title text-lg">Покров</h3>
+                <h3 class="card-title text-lg lang-ru">Покров</h3>
+                <h3 class="card-title text-lg lang-en" style="display:none">Intercession</h3>
               </div>
               <div class="card-content">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Intercession_of_the_Theotokos_icon_%28Novgorod%2C_1400s%29.jpg/800px-Intercession_of_the_Theotokos_icon_%28Novgorod%2C_1400s%29.jpg" alt="Покров" class="w-full h-32 object-cover rounded">
-                <p class="mt-2 text-sm dark:text-gray-300">Праздник Покрова Пресвятой Богородицы с молебнами и народными гуляниями.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Intercession_of_the_Theotokos_icon_%28Novgorod%2C_1400s%29.jpg/800px-Intercession_of_the_Theotokos_icon_%28Novgorod%2C_1400s%29.jpg" 
+                     alt="Покров" 
+                     class="w-full h-32 object-cover rounded">
+                <p class="mt-2 text-sm dark:text-gray-300 lang-ru">Праздник Покрова Пресвятой Богородицы с молебнами и народными гуляниями.</p>
+                <p class="mt-2 text-sm dark:text-gray-300 lang-en" style="display:none">Feast of the Intercession of the Theotokos with prayers and folk festivities.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Добавлена интерактивная карта элементов казачьей культуры -->
-      <div class="card">
+      <!-- 3D Artifact Gallery -->
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">Элементы казачьей культуры</h2>
-          <p class="card-description">Нажмите на точки, чтобы узнать больше</p>
+          <h2 class="card-title lang-ru">3D Галерея казачьих артефактов</h2>
+          <h2 class="card-title lang-en" style="display:none">3D Gallery of Cossack Artifacts</h2>
+          <p class="card-description lang-ru">Наведите на карточку, чтобы перевернуть и узнать больше</p>
+          <p class="card-description lang-en" style="display:none">Hover over cards to flip and learn more</p>
+        </div>
+        <div class="card-content">
+          <div class="artifact-gallery">
+            <div class="artifact">
+              <div class="artifact-face artifact-front">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Cossack_saber.jpg/300px-Cossack_saber.jpg" alt="Казачья шашка">
+                <h3 class="lang-ru">Казачья шашка</h3>
+                <h3 class="lang-en" style="display:none">Cossack Saber</h3>
+              </div>
+              <div class="artifact-face artifact-back">
+                <p class="lang-ru">Холодное оружие с изогнутым клинком, основной атрибут казака. Длина около 90-105 см.</p>
+                <p class="lang-en" style="display:none">A curved bladed weapon, the main attribute of a Cossack. Length about 90-105 cm.</p>
+              </div>
+            </div>
+            
+            <div class="artifact">
+              <div class="artifact-face artifact-front">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Cossack_papakha.jpg/300px-Cossack_papakha.jpg" alt="Папаха">
+                <h3 class="lang-ru">Папаха</h3>
+                <h3 class="lang-en" style="display:none">Papakha</h3>
+              </div>
+              <div class="artifact-face artifact-back">
+                <p class="lang-ru">Традиционный головной убор из овчины. Символ казачьего достоинства.</p>
+                <p class="lang-en" style="display:none">Traditional sheepskin hat. A symbol of Cossack dignity.</p>
+              </div>
+            </div>
+            
+            <div class="artifact">
+              <div class="artifact-face artifact-front">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Cossack_bandura.jpg/300px-Cossack_bandura.jpg" alt="Бандура">
+                <h3 class="lang-ru">Бандура</h3>
+                <h3 class="lang-en" style="display:none">Bandura</h3>
+              </div>
+              <div class="artifact-face artifact-back">
+                <p class="lang-ru">Народный музыкальный инструмент с 12-20 струнами. Использовалась кобзарями.</p>
+                <p class="lang-en" style="display:none">Folk musical instrument with 12-20 strings. Used by kobzars.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Interactive elements -->
+      <div class="card fade-in">
+        <div class="card-header">
+          <h2 class="card-title lang-ru">Элементы казачьей культуры</h2>
+          <h2 class="card-title lang-en" style="display:none">Elements of Cossack Culture</h2>
+          <p class="card-description lang-ru">Нажмите на точки, чтобы узнать больше</p>
+          <p class="card-description lang-en" style="display:none">Click on points to learn more</p>
         </div>
         <div class="card-content">
           <div class="image-map-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" alt="Казачья культура" class="image-map">
-            <div class="image-map-point" style="top: 30%; left: 20%;" onmouseover="showTooltip(this, 'Казачья шашка - традиционное оружие казаков')" onmouseout="hideTooltip(this)"></div>
-            <div class="image-map-point" style="top: 60%; left: 50%;" onmouseover="showTooltip(this, 'Папаха - традиционный головной убор')" onmouseout="hideTooltip(this)"></div>
-            <div class="image-map-point" style="top: 40%; left: 70%;" onmouseover="showTooltip(this, 'Черкеска - традиционная верхняя одежда')" onmouseout="hideTooltip(this)"></div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" 
+                 alt="Казачья культура" 
+                 class="image-map">
+            <div class="image-map-point" style="top: 30%; left: 20%;" 
+                 data-info-ru="Казачья шашка - традиционное оружие казаков"
+                 data-info-en="Cossack saber - traditional Cossack weapon"></div>
+            <div class="image-map-point" style="top: 60%; left: 50%;" 
+                 data-info-ru="Папаха - традиционный головной убор"
+                 data-info-en="Papakha - traditional headdress"></div>
+            <div class="image-map-point" style="top: 40%; left: 70%;" 
+                 data-info-ru="Черкеска - традиционная верхняя одежда"
+                 data-info-en="Cherkeska - traditional outerwear"></div>
             <div class="image-map-tooltip"></div>
           </div>
         </div>
@@ -770,39 +1199,57 @@
 
     <!-- Modern Section -->
     <section id="modern-section" class="space-y-6" style="display: none;">
-      <div class="card">
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">Современное состояние</h2>
+          <h2 class="card-title lang-ru">Современное состояние</h2>
+          <h2 class="card-title lang-en" style="display:none">Modern Day</h2>
         </div>
         <div class="card-content">
           <div class="grid md:grid-cols-2 gap-6">
             <div class="space-y-4">
-              <p>
+              <p class="lang-ru">
                 Сегодня Астраханское казачье войско активно участвует в общественной жизни региона. Казаки играют важную роль в патриотическом воспитании молодежи, охране общественного порядка и сохранении культурных традиций.
               </p>
-              <p>
+              <p class="lang-en" style="display:none">
+                Today, the Astrakhan Cossack Host is actively involved in the public life of the region. The Cossacks play an important role in the patriotic education of youth, maintaining public order and preserving cultural traditions.
+              </p>
+              <p class="lang-ru">
                 Войско насчитывает несколько тысяч человек, объединенных в станичные общества. Эти общества занимаются организацией мероприятий, поддержкой ветеранов и развитием казачьей культуры.
               </p>
-              <p>
+              <p class="lang-en" style="display:none">
+                The Host numbers several thousand people united in village societies. These societies are engaged in organizing events, supporting veterans and developing Cossack culture.
+              </p>
+              <p class="lang-ru">
                 Казаки также участвуют в военно-полевых сборах, где отрабатывают навыки верховой езды, стрельбы и рукопашного боя. Эти сборы помогают поддерживать боевую готовность и укреплять связи между казаками.
               </p>
-              <p>
+              <p class="lang-en" style="display:none">
+                The Cossacks also participate in military field training, where they practice horse riding, shooting and hand-to-hand combat skills. These trainings help maintain combat readiness and strengthen ties between Cossacks.
+              </p>
+              <p class="lang-ru">
                 Важным направлением деятельности казаков является социальная работа. Они помогают нуждающимся, организуют благотворительные акции и участвуют в волонтерских проектах.
               </p>
+              <p class="lang-en" style="display:none">
+                An important area of Cossack activity is social work. They help those in need, organize charity events and participate in volunteer projects.
+              </p>
               <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%B5%D1%81%D1%82%D1%80%D0%BE%D0%B2%D0%BE%D0%B5_%D0%BA%D0%B0%D0%B7%D0%B0%D1%87%D1%8C%D0%B5_%D0%B2%D0%BE%D0%B9%D1%81%D0%BA%D0%BE" class="wiki-link" target="_blank">
-                <i class="fab fa-wikipedia-w mr-2"></i> Узнать о современном казачестве
+                <i class="fab fa-wikipedia-w mr-2"></i> 
+                <span class="lang-ru">Узнать о современном казачестве</span>
+                <span class="lang-en" style="display:none">Learn about modern Cossacks</span>
               </a>
             </div>
             <div class="flex justify-center">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Modern_Russian_Cossacks.jpg/800px-Modern_Russian_Cossacks.jpg" alt="Современные казаки" class="rounded-lg shadow-md w-full h-auto object-cover">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Modern_Russian_Cossacks.jpg/800px-Modern_Russian_Cossacks.jpg" 
+                   alt="Современные казаки" 
+                   class="rounded-lg shadow-md w-full h-auto object-cover">
             </div>
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">Основные направления деятельности</h2>
+          <h2 class="card-title lang-ru">Основные направления деятельности</h2>
+          <h2 class="card-title lang-en" style="display:none">Main Activities</h2>
         </div>
         <div class="card-content">
           <div class="grid md:grid-cols-2 gap-4">
@@ -810,66 +1257,81 @@
               <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
                 <i class="fas fa-flag"></i>
               </div>
-              <p>Патриотическое воспитание молодежи через участие в военно-патриотических клубах и лагерях.</p>
+              <p class="lang-ru">Патриотическое воспитание молодежи через участие в военно-патриотических клубах и лагерях.</p>
+              <p class="lang-en" style="display:none">Patriotic education of youth through participation in military-patriotic clubs and camps.</p>
             </div>
             <div class="flex items-center space-x-2 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
               <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
                 <i class="fas fa-shield-alt"></i>
               </div>
-              <p>Охрана общественного порядка на массовых мероприятиях и в общественных местах.</p>
+              <p class="lang-ru">Охрана общественного порядка на массовых мероприятиях и в общественных местах.</p>
+              <p class="lang-en" style="display:none">Maintaining public order at mass events and in public places.</p>
             </div>
             <div class="flex items-center space-x-2 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
               <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
                 <i class="fas fa-book"></i>
               </div>
-              <p>Сохранение и популяризация казачьих традиций через проведение культурных мероприятий и фестивалей.</p>
+              <p class="lang-ru">Сохранение и популяризация казачьих традиций через проведение культурных мероприятий и фестивалей.</p>
+              <p class="lang-en" style="display:none">Preservation and popularization of Cossack traditions through cultural events and festivals.</p>
             </div>
             <div class="flex items-center space-x-2 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
               <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
                 <i class="fas fa-campground"></i>
               </div>
-              <p>Военно-полевые сборы для поддержания боевой готовности и обучения молодых казаков.</p>
+              <p class="lang-ru">Военно-полевые сборы для поддержания боевой готовности и обучения молодых казаков.</p>
+              <p class="lang-en" style="display:none">Military field training to maintain combat readiness and train young Cossacks.</p>
             </div>
             <div class="flex items-center space-x-2 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
               <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
                 <i class="fas fa-music"></i>
               </div>
-              <p>Организация культурных мероприятий, концертов и выставок, посвященных казачьей культуре.</p>
+              <p class="lang-ru">Организация культурных мероприятий, концертов и выставок, посвященных казачьей культуре.</p>
+              <p class="lang-en" style="display:none">Organization of cultural events, concerts and exhibitions dedicated to Cossack culture.</p>
             </div>
             <div class="flex items-center space-x-2 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
               <div class="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center text-white">
                 <i class="fas fa-hands-helping"></i>
               </div>
-              <p>Социальная работа и помощь нуждающимся, участие в благотворительных акциях и волонтерских проектах.</p>
+              <p class="lang-ru">Социальная работа и помощь нуждающимся, участие в благотворительных акциях и волонтерских проектах.</p>
+              <p class="lang-en" style="display:none">Social work and assistance to those in need, participation in charity events and volunteer projects.</p>
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Добавлена форма обратной связи -->
-      <div class="card">
+      <!-- Join form -->
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">Присоединиться к казачеству</h2>
-          <p class="card-description">Заполните форму, если хотите узнать больше о вступлении</p>
+          <h2 class="card-title lang-ru">Присоединиться к казачеству</h2>
+          <h2 class="card-title lang-en" style="display:none">Join the Cossacks</h2>
+          <p class="card-description lang-ru">Заполните форму, если хотите узнать больше о вступлении</p>
+          <p class="card-description lang-en" style="display:none">Fill out the form if you want to learn more about joining</p>
         </div>
         <div class="card-content">
           <form id="join-form" class="space-y-4">
             <div>
-              <label for="name" class="block mb-1">Ваше имя</label>
+              <label for="name" class="block mb-1 lang-ru">Ваше имя</label>
+              <label for="name" class="block mb-1 lang-en" style="display:none">Your Name</label>
               <input type="text" id="name" class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600" required>
             </div>
             <div>
-              <label for="email" class="block mb-1">Email</label>
+              <label for="email" class="block mb-1 lang-ru">Email</label>
+              <label for="email" class="block mb-1 lang-en" style="display:none">Email</label>
               <input type="email" id="email" class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600" required>
             </div>
             <div>
-              <label for="message" class="block mb-1">Ваше сообщение</label>
+              <label for="message" class="block mb-1 lang-ru">Ваше сообщение</label>
+              <label for="message" class="block mb-1 lang-en" style="display:none">Your Message</label>
               <textarea id="message" rows="4" class="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:border-gray-600"></textarea>
             </div>
-            <button type="submit" class="btn btn-default">Отправить</button>
+            <button type="submit" class="btn btn-default">
+              <span class="lang-ru">Отправить</span>
+              <span class="lang-en" style="display:none">Submit</span>
+            </button>
           </form>
           <div id="form-success" class="hidden mt-4 p-4 bg-green-100 text-green-800 rounded dark:bg-green-900 dark:text-green-200">
-            Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.
+            <p class="lang-ru">Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.</p>
+            <p class="lang-en" style="display:none">Thank you! Your application has been sent. We will contact you soon.</p>
           </div>
         </div>
       </div>
@@ -877,32 +1339,49 @@
 
     <!-- Gallery Section -->
     <section id="gallery-section" class="space-y-6" style="display: none;">
-      <div class="card">
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">Галерея</h2>
-          <p class="card-description">Фотографии из жизни астраханских казаков</p>
+          <h2 class="card-title lang-ru">Галерея</h2>
+          <h2 class="card-title lang-en" style="display:none">Gallery</h2>
+          <p class="card-description lang-ru">Фотографии из жизни астраханских казаков</p>
+          <p class="card-description lang-en" style="display:none">Photos from the life of Astrakhan Cossacks</p>
         </div>
         <div class="card-content">
           <div class="gallery-container">
             <div class="gallery-slide active">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Astrakhan_Cossacks_1880s.jpg/800px-Astrakhan_Cossacks_1880s.jpg" alt="Астраханские казаки в 1880-х" class="w-full rounded-lg shadow-md">
-              <p class="text-center mt-2 text-sm">Астраханские казаки в 1880-х годах</p>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Astrakhan_Cossacks_1880s.jpg/800px-Astrakhan_Cossacks_1880s.jpg" 
+                   alt="Астраханские казаки в 1880-х" 
+                   class="w-full rounded-lg shadow-md">
+              <p class="text-center mt-2 text-sm lang-ru">Астраханские казаки в 1880-х годах</p>
+              <p class="text-center mt-2 text-sm lang-en" style="display:none">Astrakhan Cossacks in the 1880s</p>
             </div>
             <div class="gallery-slide">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" alt="Казачий танец" class="w-full rounded-lg shadow-md">
-              <p class="text-center mt-2 text-sm">Традиционный казачий танец</p>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" 
+                   alt="Казачий танец" 
+                   class="w-full rounded-lg shadow-md">
+              <p class="text-center mt-2 text-sm lang-ru">Традиционный казачий танец</p>
+              <p class="text-center mt-2 text-sm lang-en" style="display:none">Traditional Cossack dance</p>
             </div>
             <div class="gallery-slide">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Modern_Russian_Cossacks.jpg/800px-Modern_Russian_Cossacks.jpg" alt="Современные казаки" class="w-full rounded-lg shadow-md">
-              <p class="text-center mt-2 text-sm">Современные казаки на параде</p>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Modern_Russian_Cossacks.jpg/800px-Modern_Russian_Cossacks.jpg" 
+                   alt="Современные казаки" 
+                   class="w-full rounded-lg shadow-md">
+              <p class="text-center mt-2 text-sm lang-ru">Современные казаки на параде</p>
+              <p class="text-center mt-2 text-sm lang-en" style="display:none">Modern Cossacks at a parade</p>
             </div>
             <div class="gallery-slide">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cossack_parade_in_Novocherkassk_2013.jpg/800px-Cossack_parade_in_Novocherkassk_2013.jpg" alt="Казачий парад" class="w-full rounded-lg shadow-md">
-              <p class="text-center mt-2 text-sm">Казачий парад в Новочеркасске</p>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cossack_parade_in_Novocherkassk_2013.jpg/800px-Cossack_parade_in_Novocherkassk_2013.jpg" 
+                   alt="Казачий парад" 
+                   class="w-full rounded-lg shadow-md">
+              <p class="text-center mt-2 text-sm lang-ru">Казачий парад в Новочеркасске</p>
+              <p class="text-center mt-2 text-sm lang-en" style="display:none">Cossack parade in Novocherkassk</p>
             </div>
             <div class="gallery-slide">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Cossacks_in_Red_Square_2005.jpg/800px-Cossacks_in_Red_Square_2005.jpg" alt="Казаки в Москве" class="w-full rounded-lg shadow-md">
-              <p class="text-center mt-2 text-sm">Казаки на Красной площади</p>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Cossacks_in_Red_Square_2005.jpg/800px-Cossacks_in_Red_Square_2005.jpg" 
+                   alt="Казаки в Москве" 
+                   class="w-full rounded-lg shadow-md">
+              <p class="text-center mt-2 text-sm lang-ru">Казаки на Красной площади</p>
+              <p class="text-center mt-2 text-sm lang-en" style="display:none">Cossacks on Red Square</p>
             </div>
             <div class="gallery-nav">
               <span class="gallery-dot active" onclick="currentSlide(0)"></span>
@@ -918,66 +1397,88 @@
 
     <!-- News Section -->
     <section id="news-section" class="space-y-6" style="display: none;">
-      <div class="card">
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">Новости</h2>
-          <p class="card-description">События и мероприятия астраханского казачества</p>
+          <h2 class="card-title lang-ru">Новости</h2>
+          <h2 class="card-title lang-en" style="display:none">News</h2>
+          <p class="card-description lang-ru">События и мероприятия астраханского казачества</p>
+          <p class="card-description lang-en" style="display:none">Events and activities of Astrakhan Cossacks</p>
         </div>
         <div class="card-content">
           <div class="grid md:grid-cols-2 gap-6">
             <div class="space-y-6">
               <div class="card bg-gray-50 hover:bg-gray-100 transition-colors">
                 <div class="card-header">
-                  <h3 class="card-title text-lg">Казачий круг в Астрахани</h3>
+                  <h3 class="card-title text-lg lang-ru">Казачий круг в Астрахани</h3>
+                  <h3 class="card-title text-lg lang-en" style="display:none">Cossack Circle in Astrakhan</h3>
                   <p class="card-description">15 мая 2023</p>
                 </div>
                 <div class="card-content">
-                  <p>В Астрахани прошел ежегодный сбор казаков, посвященный памяти предков. На мероприятии присутствовало более 500 представителей казачества со всего региона. Казаки обсудили важные вопросы, связанные с развитием казачьих общин и сохранением традиций.</p>
+                  <p class="lang-ru">В Астрахани прошел ежегодный сбор казаков, посвященный памяти предков. На мероприятии присутствовало более 500 представителей казачества со всего региона. Казаки обсудили важные вопросы, связанные с развитием казачьих общин и сохранением традиций.</p>
+                  <p class="lang-en" style="display:none">Astrakhan hosted the annual gathering of Cossacks dedicated to the memory of their ancestors. The event was attended by more than 500 representatives of the Cossacks from all over the region. The Cossacks discussed important issues related to the development of Cossack communities and the preservation of traditions.</p>
                   <a href="#" class="wiki-link mt-2 inline-block">
-                    <i class="fas fa-external-link-alt mr-2"></i> Читать полностью
+                    <i class="fas fa-external-link-alt mr-2"></i> 
+                    <span class="lang-ru">Читать полностью</span>
+                    <span class="lang-en" style="display:none">Read more</span>
                   </a>
                 </div>
               </div>
               <div class="card bg-gray-50 hover:bg-gray-100 transition-colors">
                 <div class="card-header">
-                  <h3 class="card-title text-lg">Фестиваль казачьей культуры</h3>
+                  <h3 class="card-title text-lg lang-ru">Фестиваль казачьей культуры</h3>
+                  <h3 class="card-title text-lg lang-en" style="display:none">Cossack Culture Festival</h3>
                   <p class="card-description">22 июня 2023</p>
                 </div>
                 <div class="card-content">
-                  <p>В регионе состоялся крупный фестиваль с участием творческих коллективов. Гости могли познакомиться с традиционными ремеслами, кухней и музыкой казаков. Фестиваль прошел при поддержке местных властей и казачьих обществ.</p>
+                  <p class="lang-ru">В регионе состоялся крупный фестиваль с участием творческих коллективов. Гости могли познакомиться с традиционными ремеслами, кухней и музыкой казаков. Фестиваль прошел при поддержке местных властей и казачьих обществ.</p>
+                  <p class="lang-en" style="display:none">A major festival was held in the region with the participation of creative groups. Guests could get acquainted with traditional crafts, cuisine and music of the Cossacks. The festival was held with the support of local authorities and Cossack societies.</p>
                   <a href="#" class="wiki-link mt-2 inline-block">
-                    <i class="fas fa-external-link-alt mr-2"></i> Читать полностью
+                    <i class="fas fa-external-link-alt mr-2"></i> 
+                    <span class="lang-ru">Читать полностью</span>
+                    <span class="lang-en" style="display:none">Read more</span>
                   </a>
                 </div>
               </div>
               <div class="card bg-gray-50 hover:bg-gray-100 transition-colors">
                 <div class="card-header">
-                  <h3 class="card-title text-lg">Открытие нового музея</h3>
+                  <h3 class="card-title text-lg lang-ru">Открытие нового музея</h3>
+                  <h3 class="card-title text-lg lang-en" style="display:none">Opening of a New Museum</h3>
                   <p class="card-description">10 сентября 2023</p>
                 </div>
                 <div class="card-content">
-                  <p>В одной из станиц открылся музей истории астраханского казачества. В экспозиции представлены уникальные экспонаты XIX-XX веков, рассказывающие о жизни и деятельности казаков.</p>
+                  <p class="lang-ru">В одной из станиц открылся музей истории астраханского казачества. В экспозиции представлены уникальные экспонаты XIX-XX веков, рассказывающие о жизни и деятельности казаков.</p>
+                  <p class="lang-en" style="display:none">A museum of the history of Astrakhan Cossacks opened in one of the villages. The exhibition features unique exhibits from the 19th-20th centuries that tell about the life and activities of the Cossacks.</p>
                   <a href="#" class="wiki-link mt-2 inline-block">
-                    <i class="fas fa-external-link-alt mr-2"></i> Читать полностью
+                    <i class="fas fa-external-link-alt mr-2"></i> 
+                    <span class="lang-ru">Читать полностью</span>
+                    <span class="lang-en" style="display:none">Read more</span>
                   </a>
                 </div>
               </div>
               <div class="card bg-gray-50 hover:bg-gray-100 transition-colors">
                 <div class="card-header">
-                  <h3 class="card-title text-lg">Военно-полевые сборы</h3>
+                  <h3 class="card-title text-lg lang-ru">Военно-полевые сборы</h3>
+                  <h3 class="card-title text-lg lang-en" style="display:none">Military Field Training</h3>
                   <p class="card-description">5 октября 2023</p>
                 </div>
                 <div class="card-content">
-                  <p>Казаки приняли участие в традиционных военных учениях. В программе были занятия по верховой езде, стрельбе и рукопашному бою. Учения прошли успешно, и казаки продемонстрировали высокий уровень подготовки.</p>
+                  <p class="lang-ru">Казаки приняли участие в традиционных военных учениях. В программе были занятия по верховой езде, стрельбе и рукопашному бою. Учения прошли успешно, и казаки продемонстрировали высокий уровень подготовки.</p>
+                  <p class="lang-en" style="display:none">The Cossacks took part in traditional military exercises. The program included classes in horse riding, shooting and hand-to-hand combat. The exercises were successful and the Cossacks demonstrated a high level of training.</p>
                   <a href="#" class="wiki-link mt-2 inline-block">
-                    <i class="fas fa-external-link-alt mr-2"></i> Читать полностью
+                    <i class="fas fa-external-link-alt mr-2"></i> 
+                    <span class="lang-ru">Читать полностью</span>
+                    <span class="lang-en" style="display:none">Read more</span>
                   </a>
                 </div>
               </div>
             </div>
             <div class="flex flex-col space-y-4">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cossack_parade_in_Novocherkassk_2013.jpg/800px-Cossack_parade_in_Novocherkassk_2013.jpg" alt="Казачий парад" class="rounded-lg shadow-md w-full h-64 object-cover">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" alt="Казачий танец" class="rounded-lg shadow-md w-full h-64 object-cover">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cossack_parade_in_Novocherkassk_2013.jpg/800px-Cossack_parade_in_Novocherkassk_2013.jpg" 
+                   alt="Казачий парад" 
+                   class="rounded-lg shadow-md w-full h-64 object-cover">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cossack_dance.jpg/800px-Cossack_dance.jpg" 
+                   alt="Казачий танец" 
+                   class="rounded-lg shadow-md w-full h-64 object-cover">
             </div>
           </div>
         </div>
@@ -986,28 +1487,34 @@
 
     <!-- Contacts Section -->
     <section id="contacts-section" class="space-y-6" style="display: none;">
-      <div class="card">
+      <div class="card fade-in">
         <div class="card-header">
-          <h2 class="card-title">Контакты</h2>
-          <p class="card-description">Как связаться с представителями астраханского казачества</p>
+          <h2 class="card-title lang-ru">Контакты</h2>
+          <h2 class="card-title lang-en" style="display:none">Contacts</h2>
+          <p class="card-description lang-ru">Как связаться с представителями астраханского казачества</p>
+          <p class="card-description lang-en" style="display:none">How to contact representatives of Astrakhan Cossacks</p>
         </div>
         <div class="card-content">
           <div class="grid md:grid-cols-2 gap-6">
             <div class="space-y-4">
               <div>
-                <h3 class="font-bold text-lg">Адрес</h3>
+                <h3 class="font-bold text-lg lang-ru">Адрес</h3>
+                <h3 class="font-bold text-lg lang-en" style="display:none">Address</h3>
                 <p>414000, г. Астрахань, ул. Казачья, д. 15</p>
               </div>
               <div>
-                <h3 class="font-bold text-lg">Телефон</h3>
+                <h3 class="font-bold text-lg lang-ru">Телефон</h3>
+                <h3 class="font-bold text-lg lang-en" style="display:none">Phone</h3>
                 <p>+7 (8512) 123-456</p>
               </div>
               <div>
-                <h3 class="font-bold text-lg">Электронная почта</h3>
+                <h3 class="font-bold text-lg lang-ru">Электронная почта</h3>
+                <h3 class="font-bold text-lg lang-en" style="display:none">Email</h3>
                 <p>info@astrakhan-cossacks.ru</p>
               </div>
               <div>
-                <h3 class="font-bold text-lg">Социальные сети</h3>
+                <h3 class="font-bold text-lg lang-ru">Социальные сети</h3>
+                <h3 class="font-bold text-lg lang-en" style="display:none">Social Media</h3>
                 <div class="flex space-x-4">
                   <a href="#" class="text-blue-500 hover:underline">
                     <i class="fab fa-vk"></i>
@@ -1029,111 +1536,329 @@
     </section>
   </main>
 
+  <!-- Voice Assistant -->
+  <div class="voice-assistant">
+    <button class="voice-btn" title="Голосовой помощник" id="voice-btn">
+      <i class="fas fa-microphone"></i>
+    </button>
+  </div>
+
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-6">
     <div class="container mx-auto text-center">
-      <p>&copy; 2025 Астраханское Казачество. Все права защищены.</p>
+      <p class="lang-ru">&copy; 2025 Астраханское Казачество. Все права защищены.</p>
+      <p class="lang-en" style="display:none">&copy; 2025 Astrakhan Cossacks. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script>
-    // Показ секций
+    // Language switching
+    function switchLanguage(lang) {
+      document.querySelectorAll('.lang-ru, .lang-en').forEach(el => {
+        el.style.display = el.classList.contains(`lang-${lang}`) ? 'block' : 'none';
+      });
+      
+      // Update active language button
+      document.querySelectorAll('.lang-switcher button').forEach(btn => {
+        if (btn.textContent === lang.toUpperCase()) {
+          btn.classList.remove('btn-outline');
+          btn.classList.add('btn-default');
+        } else {
+          btn.classList.remove('btn-default');
+          btn.classList.add('btn-outline');
+        }
+      });
+      
+      // Save language preference
+      localStorage.setItem('preferredLanguage', lang);
+      
+      // Update voice recognition language
+      if (voiceAssistant.recognition) {
+        voiceAssistant.recognition.lang = lang === 'en' ? 'en-US' : 'ru-RU';
+      }
+    }
+
+    // Show sections
     function showSection(sectionId) {
       document.querySelectorAll('section').forEach(section => {
         section.style.display = section.id === `${sectionId}-section` ? 'block' : 'none';
       });
       
-      // Обновляем активные кнопки в навигации
+      // Update active navigation buttons
       document.querySelectorAll('.btn-default').forEach(btn => {
         btn.classList.remove('btn-default');
         btn.classList.add('btn-ghost');
       });
       
-      // Делаем активной текущую кнопку
       const activeBtn = document.querySelector(`button[onclick="showSection('${sectionId}')"]`);
       if (activeBtn) {
         activeBtn.classList.remove('btn-ghost');
         activeBtn.classList.add('btn-default');
       }
+      
+      // Reset gallery if showing gallery section
+      if (sectionId === 'gallery') {
+        currentSlide(0);
+      }
+      
+      // Trigger animations for visible elements
+      setTimeout(() => {
+        document.querySelectorAll(`#${sectionId}-section .fade-in`).forEach(el => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+      }, 100);
     }
 
-    // Переключение темы
+    // Dark mode toggle
     function toggleDarkMode() {
       document.body.classList.toggle('dark-theme');
       localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));
     }
 
-    // Проверка сохраненной темы при загрузке
-    if (localStorage.getItem('darkMode') === 'true') {
-      document.body.classList.add('dark-theme');
-    }
-
-    // Галерея
+    // Gallery functions
+    let slideIndex = 0;
     function currentSlide(index) {
       const slides = document.querySelectorAll('.gallery-slide');
       const dots = document.querySelectorAll('.gallery-dot');
+      
+      slideIndex = index;
+      if (slideIndex >= slides.length) { slideIndex = 0; }
+      if (slideIndex < 0) { slideIndex = slides.length - 1; }
+      
       slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
+        slide.classList.toggle('active', i === slideIndex);
       });
+      
       dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
+        dot.classList.toggle('active', i === slideIndex);
       });
     }
 
-    // Автоматическое переключение слайдов галереи
-    let slideIndex = 0;
     function autoSlide() {
-      const slides = document.querySelectorAll('.gallery-slide');
-      slideIndex = (slideIndex + 1) % slides.length;
-      currentSlide(slideIndex);
+      if (document.getElementById('gallery-section').style.display === 'block') {
+        currentSlide(slideIndex + 1);
+      }
     }
     
-    // Запускаем автоматическое переключение только если галерея видна
-    setInterval(() => {
-      if (document.getElementById('gallery-section').style.display === 'block') {
-        autoSlide();
-      }
-    }, 5000);
+    // Start gallery auto-rotation
+    setInterval(autoSlide, 5000);
 
-    // Проверка ответов в тесте
-    function checkAnswer(element, correctAnswer, message) {
+    // Quiz answer checking
+    function checkAnswer(element, correctAnswer, ruMessage, enMessage) {
       const options = element.parentElement.querySelectorAll('.quiz-option');
       options.forEach(opt => opt.classList.remove('selected'));
       element.classList.add('selected');
       
       const resultDiv = element.parentElement.querySelector('.quiz-result');
-      resultDiv.textContent = message;
-      resultDiv.className = 'quiz-result ' + 
-        (element.textContent.trim() === correctAnswer || element.getAttribute('onclick').includes(correctAnswer) ? 'correct' : 'incorrect');
-    }
-
-    // Интерактивная карта изображения
-    function showTooltip(point, text) {
-      const tooltip = document.querySelector('.image-map-tooltip');
-      tooltip.textContent = text;
-      tooltip.style.display = 'block';
+      const isCorrect = element.textContent.trim() === correctAnswer || 
+                       element.getAttribute('onclick').includes(correctAnswer);
       
-      const rect = point.getBoundingClientRect();
-      tooltip.style.top = `${rect.top - 40}px`;
-      tooltip.style.left = `${rect.left}px`;
+      if (isCorrect) {
+        resultDiv.className = 'quiz-result correct';
+      } else {
+        resultDiv.className = 'quiz-result incorrect';
+      }
+      
+      // Show message in current language
+      const currentLang = localStorage.getItem('preferredLanguage') || 'ru';
+      resultDiv.textContent = currentLang === 'ru' ? ruMessage : enMessage;
     }
 
-    function hideTooltip() {
-      document.querySelector('.image-map-tooltip').style.display = 'none';
-    }
+    // Settlement map tooltips
+    document.querySelectorAll('.map-point').forEach(point => {
+      point.addEventListener('mouseover', function(e) {
+        const tooltip = this.parentElement.querySelector('.map-tooltip');
+        const currentLang = localStorage.getItem('preferredLanguage') || 'ru';
+        const info = currentLang === 'ru' ? this.dataset.infoRu : this.dataset.infoEn;
+        
+        tooltip.textContent = info;
+        tooltip.style.display = 'block';
+        
+        // Position tooltip near the point
+        const rect = this.getBoundingClientRect();
+        tooltip.style.top = `${rect.top - 50}px`;
+        tooltip.style.left = `${rect.left}px`;
+      });
+      
+      point.addEventListener('mouseout', function() {
+        const tooltip = this.parentElement.querySelector('.map-tooltip');
+        tooltip.style.display = 'none';
+      });
+    });
 
-    // Обработка формы
+    // Image map tooltips
+    document.querySelectorAll('.image-map-point').forEach(point => {
+      point.addEventListener('mouseover', function(e) {
+        const tooltip = document.querySelector('.image-map-tooltip');
+        const currentLang = localStorage.getItem('preferredLanguage') || 'ru';
+        const info = currentLang === 'ru' ? this.dataset.infoRu : this.dataset.infoEn;
+        
+        tooltip.textContent = info;
+        tooltip.style.display = 'block';
+        
+        const rect = this.getBoundingClientRect();
+        tooltip.style.top = `${rect.top - 40}px`;
+        tooltip.style.left = `${rect.left}px`;
+      });
+      
+      point.addEventListener('mouseout', function() {
+        document.querySelector('.image-map-tooltip').style.display = 'none';
+      });
+    });
+
+    // Form submission
     document.getElementById('join-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      // Здесь можно добавить отправку формы на сервер
       this.style.display = 'none';
       document.getElementById('form-success').style.display = 'block';
     });
 
-    // Показываем первую секцию при загрузке
+    // Voice Assistant
+    const voiceAssistant = {
+      recognition: null,
+      
+      init() {
+        if ('webkitSpeechRecognition' in window) {
+          this.recognition = new webkitSpeechRecognition();
+          this.recognition.lang = localStorage.getItem('preferredLanguage') === 'en' ? 'en-US' : 'ru-RU';
+          this.recognition.interimResults = false;
+          
+          this.recognition.onresult = (event) => {
+            const command = event.results[0][0].transcript.toLowerCase();
+            this.processCommand(command);
+          };
+          
+          this.recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+          };
+          
+          this.recognition.onend = () => {
+            document.getElementById('voice-btn').classList.remove('listening');
+          };
+        }
+      },
+      
+      processCommand(command) {
+        const currentLang = localStorage.getItem('preferredLanguage') || 'ru';
+        let response = '';
+        
+        if (command.includes('история') || command.includes('history')) {
+          showSection('history');
+          response = currentLang === 'ru' ? 'Открываю раздел истории' : 'Opening history section';
+        } 
+        else if (command.includes('культура') || command.includes('culture')) {
+          showSection('culture');
+          response = currentLang === 'ru' ? 'Раздел культуры' : 'Culture section';
+        }
+        else if (command.includes('современность') || command.includes('modern')) {
+          showSection('modern');
+          response = currentLang === 'ru' ? 'Раздел современности' : 'Modern section';
+        }
+        else if (command.includes('галерея') || command.includes('gallery')) {
+          showSection('gallery');
+          response = currentLang === 'ru' ? 'Раздел галереи' : 'Gallery section';
+        }
+        else if (command.includes('новости') || command.includes('news')) {
+          showSection('news');
+          response = currentLang === 'ru' ? 'Раздел новостей' : 'News section';
+        }
+        else if (command.includes('контакты') || command.includes('contacts')) {
+          showSection('contacts');
+          response = currentLang === 'ru' ? 'Раздел контактов' : 'Contacts section';
+        }
+        else if (command.includes('светлая') || command.includes('light')) {
+          document.body.classList.remove('dark-theme');
+          localStorage.setItem('darkMode', false);
+          response = currentLang === 'ru' ? 'Включаю светлую тему' : 'Switching to light theme';
+        }
+        else if (command.includes('темная') || command.includes('dark')) {
+          document.body.classList.add('dark-theme');
+          localStorage.setItem('darkMode', true);
+          response = currentLang === 'ru' ? 'Включаю темную тему' : 'Switching to dark theme';
+        }
+        else if (command.includes('русский') || command.includes('russian')) {
+          switchLanguage('ru');
+          response = 'Переключаю на русский язык';
+        }
+        else if (command.includes('английский') || command.includes('english')) {
+          switchLanguage('en');
+          response = 'Switching to English';
+        }
+        else {
+          response = currentLang === 'ru' 
+            ? 'Не распознана команда. Попробуйте сказать "история", "культура", "галерея"' 
+            : 'Command not recognized. Try saying "history", "culture", "gallery"';
+        }
+        
+        if ('speechSynthesis' in window) {
+          const utterance = new SpeechSynthesisUtterance(response);
+          utterance.lang = currentLang === 'ru' ? 'ru-RU' : 'en-US';
+          speechSynthesis.speak(utterance);
+        }
+      }
+    };
+
+    // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
+      // Set preferred language
+      const preferredLanguage = localStorage.getItem('preferredLanguage') || 'ru';
+      switchLanguage(preferredLanguage);
+      
+      // Set dark mode if preferred
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-theme');
+      }
+      
+      // Show first section
       showSection('history');
+      
+      // Initialize voice assistant
+      voiceAssistant.init();
+      
+      // Voice button handler
+      document.getElementById('voice-btn').addEventListener('click', function() {
+        if (!voiceAssistant.recognition) {
+          alert(localStorage.getItem('preferredLanguage') === 'en' 
+            ? 'Voice control not supported in your browser' 
+            : 'Голосовое управление не поддерживается в вашем браузере');
+          return;
+        }
+        
+        this.classList.toggle('listening');
+        if (this.classList.contains('listening')) {
+          voiceAssistant.recognition.start();
+        } else {
+          voiceAssistant.recognition.stop();
+        }
+      });
+      
+      // Scroll animations
+      const animateOnScroll = () => {
+        document.querySelectorAll('.fade-in').forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.8) {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }
+        });
+      };
+      
+      window.addEventListener('scroll', animateOnScroll);
+      animateOnScroll(); // Initialize on load
+    });
+    
+    // Responsive adjustments
+    window.addEventListener('resize', function() {
+      if (window.innerWidth < 768) {
+        document.querySelectorAll('.card').forEach(card => {
+          card.style.margin = '0.5rem 0';
+        });
+      } else {
+        document.querySelectorAll('.card').forEach(card => {
+          card.style.margin = '';
+        });
+      }
     });
   </script>
 </body>
